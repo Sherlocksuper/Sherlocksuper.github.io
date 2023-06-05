@@ -17,9 +17,9 @@ export default {
 
     </div>
     <div class="header_contents">
-      <h1 class="header_title1">Hello,I am Sherlock.A student from WeiHai :)</h1>
-      <h1 class="header_title2">I am a novice web developer :)</h1>
-      <h1 class="header_title3">And I am trying my best to get progress</h1>
+      <h1 class="header_title1">Hello,I am Sherlock.A student from WeiHai&#128536</h1>
+      <h1 class="header_title2">I am a novice web developer&#128554</h1>
+      <h1 class="header_title3">And I am trying my best to get progress&#128526</h1>
     </div>
   </div>
 </template>
@@ -65,7 +65,7 @@ export default {
 }
 
 .header_title3 {
-  animation: show_title3 steps(39) 5s;
+  animation: show_title3 steps(42) 5s;
   animation-delay: 11s;
   animation-fill-mode: forwards;
 }
@@ -94,7 +94,7 @@ export default {
     width: 0;
   }
   100% {
-    width: 39ch;
+    width: 42ch;
   }
 }
 

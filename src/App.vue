@@ -65,7 +65,7 @@ export default {
   opacity: 1;
 }
 
-img {
+.total_background {
   position: absolute;
   z-index: 0;
   top: 0;
@@ -86,6 +86,21 @@ img {
   overflow-y: scroll;
 }
 
+.total::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+.total::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #555;
+  background-clip: padding-box;
+}
+
+.total::-webkit-scrollbar-thumb:hover {
+  background-color: white;
+}
+
 .header {
   width: 100%;
   height: 65%;
@@ -102,11 +117,10 @@ img {
 
 .body {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
 }
 
 header_show {
