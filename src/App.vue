@@ -17,7 +17,6 @@ export default {
   mounted() {
     let pageFadeTimer = setTimeout(() => {
       this.prepared = true;
-      clearTimeout(timer);
     }, 10);
   },
   methods: {}
@@ -35,11 +34,11 @@ export default {
       </div>
       <div class="footer"></div>
     </div>
-    <img class="total_background" src="pic/testpic.png" alt="">
+    <img class="total_background" src="pic/img_1.png" alt="">
   </div>
 </template>
 
-<style>
+<style scoped>
 * {
   margin: 0;
   padding: 0;
