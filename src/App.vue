@@ -34,7 +34,7 @@ export default {
       </div>
       <div class="footer"></div>
     </div>
-    <img class="total_background" src="pic/img_1.png" alt="">
+    <img class="total_background" src="../src/pic/img_1.png" alt="">
   </div>
 </template>
 
@@ -50,6 +50,8 @@ export default {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  top: 0;
+  left: 0;
   transition: 1s;
   opacity: 0;
   background-color: black;

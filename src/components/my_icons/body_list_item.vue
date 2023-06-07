@@ -11,7 +11,7 @@ export default {
 
 <template>
   <div class="header_list_item_total">
-    <img src="public/pic/testpic.png ">
+    <img src="../../pic/testpic.png ">
     <div class="item_content">
       <h1 class="item_content_title">title</h1>
       <p class="item_content_content">content</p>

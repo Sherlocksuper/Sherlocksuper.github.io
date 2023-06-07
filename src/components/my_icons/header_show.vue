@@ -74,7 +74,7 @@ export default {
 }
 
 .header_contents .header_title {
-  font: bold 100% Consolas, Monaco, monospace;
+  font: bold 150% Consolas, Monaco, monospace;
   width: 0;
   white-space: nowrap;
   overflow: hidden;
