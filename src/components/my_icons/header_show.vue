@@ -16,9 +16,6 @@ export default {
 
 <template>
   <div class="header_total">
-    <div class="header_tools">
-    </div>
-
     <div class="header_contents">
       <div class="header_contents_me">
         <transition name="header_contents" mode="out-in" @after-enter="index_show=(index_show%3)+1">
@@ -53,16 +50,6 @@ export default {
   height: 90%;
   position: relative;
 }
-
-.header_tools {
-  width: 80%;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid red;
-}
-
 .header_contents_me {
   width: 100%;
   height: auto;
