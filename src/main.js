@@ -1,8 +1,10 @@
 import {createApp} from 'vue'
 import App from './App.vue'
 
-//导入路由并挂在到App
 import router from './index.js'
-//挂载到app
-createApp(App).use(router).mount('#app')
+import store from './store.js'
+import ElementPlus from 'element-plus'
+import  'element-plus/dist/index.css'
+
+createApp(App).use(router).use(store).use(ElementPlus).mount('#app');
 

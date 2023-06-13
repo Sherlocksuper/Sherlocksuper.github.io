@@ -2,7 +2,12 @@ import {createRouter, createWebHistory} from 'vue-router';
 import HomePage from "@/Routerview/HomePage.vue";
 import MyTimeTravel from "@/Routerview/MyTimeTravel.vue";
 
+
 const routes = [
+    {
+        path:'/',
+      redirect:'/HomePage',
+    },
     {
         path: '/HomePage',
         name: 'HomePage',
@@ -14,7 +19,6 @@ const routes = [
         component: MyTimeTravel
     }
 ];
-// 创建Router对象
 const router = createRouter({
     history: createWebHistory(),
     routes,

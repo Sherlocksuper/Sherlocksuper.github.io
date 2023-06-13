@@ -1,6 +1,6 @@
 <script>
-import header_show from '@/components/my_icons/header_show.vue';
-import body_show from "@/components/my_icons/body_show.vue";
+import header_show from '@/components/header_show.vue';
+import body_show from "@/components/body_show.vue";
 
 export default {
   name: 'App',
@@ -32,7 +32,7 @@ export default {
       <body_show class="body"></body_show>
       <div class="footer"></div>
     </div>
-    <img class="total_background" src="../pic/img_1.png" alt="">
+    <img class="total_background" src="../pic/icons/background.png" alt="">
   </div>
 </template>
 
@@ -52,7 +52,6 @@ export default {
   left: 0;
   transition: 1s;
   opacity: 0;
-  background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,7 +70,6 @@ export default {
   height: 100%;
   object-fit: cover;
   filter: blur(5px);
-  opacity: 40%;
 }
 
 .total {

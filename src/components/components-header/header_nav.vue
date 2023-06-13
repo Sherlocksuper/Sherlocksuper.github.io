@@ -2,9 +2,7 @@
 export default {
   name: "header_show",
   data() {
-    return {
-      isNavCollapsed: true,
-    };
+    return {};
   },
   components: {},
   mounted() {
@@ -12,10 +10,10 @@ export default {
   methods: {},
 };
 </script>
-
 <template>
-  <nav class="header_tools" :class="{'collapsed':isNavCollapsed}">
+  <nav class="header_tools">
     <router-link id="sherlock_logo" to="homepage">sherlock</router-link>
+    <img class="header_my_headPic" src="../../pic/icons/head_pic.jpg" alt="">
     <div class="header_tools_right">
       <router-link to="Time">时间</router-link>
       <router-link to="Time">关于</router-link>
@@ -32,18 +30,14 @@ export default {
 
 a {
   text-decoration: none;
-  color: #d3d3d3;
+  color: white;
   margin: 0 10px 0 20px;
-  padding: 5px 10px;
   border-radius: 5px;
-  font-size: 15px;
-  font-family: "Microsoft YaHei", serif;
+  font-size: 25px;
   font-weight: 700;
-  border-color: black;
-}
-
-a:hover {
-  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  writing-mode: horizontal-tb;
+  white-space: nowrap;
 }
 
 a::after {
@@ -66,16 +60,10 @@ a:hover::after {
   align-items: center;
   height: auto;
   width: 100%;
-  top: 10px;
+  top: 20px;
   left: 0;
   border: 1px solid red;
-  overflow: hidden;
   z-index: 2;
-}
-
-.header_tools.collapsed {
-  height: 0
-
 }
 
 .header_tools_right {
@@ -84,7 +72,43 @@ a:hover::after {
   align-items: center;
   border: 1px solid red;
   position: absolute;
-  right: 20px;
-  width: auto;
+  right: 100px;
+  overflow: hidden;
+  height: 100%;
+  width: 0;
+  transition: all 1s;
 }
+
+.header_my_headPic {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  position: absolute;
+  right: 40px;
+  transition: all 1s;
+}
+
+
+.header_my_headPic:hover {
+  transform: rotate(360deg);
+  transition: all 0.4s ease;
+}
+
+.header_my_headPic:hover ~ .header_tools_right {
+  width: 300px;
+  transition: all 0.4s ease;
+}
+
+/*右栏悬停时 ，自身300*/
+.header_tools_right:hover {
+  width: 300px;
+  transition: all 0.4s ease;
+
+}
+
+.header_tools_right a {
+  font-size: 20px;
+}
+
+
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-import Header_nav from "@/components/my_icons/header_nav.vue";
+import Header_nav from "@/components/components-header/header_nav.vue";
 </script>
 <script>
 </script>
