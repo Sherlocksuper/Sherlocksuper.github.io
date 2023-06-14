@@ -34,8 +34,8 @@ a {
   margin: 0 10px 0 20px;
   border-radius: 5px;
   font-size: 25px;
-  font-weight: 700;
-  font-family: "Times New Roman", Times, serif;
+  font-weight: 150;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   writing-mode: horizontal-tb;
   white-space: nowrap;
 }
@@ -62,7 +62,6 @@ a:hover::after {
   width: 100%;
   top: 20px;
   left: 0;
-  border: 1px solid red;
   z-index: 2;
 }
 
@@ -70,7 +69,6 @@ a:hover::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid red;
   position: absolute;
   right: 100px;
   overflow: hidden;
@@ -88,7 +86,6 @@ a:hover::after {
   transition: all 1s;
 }
 
-
 .header_my_headPic:hover {
   transform: rotate(360deg);
   transition: all 0.4s ease;
@@ -99,16 +96,12 @@ a:hover::after {
   transition: all 0.4s ease;
 }
 
-/*右栏悬停时 ，自身300*/
 .header_tools_right:hover {
   width: 300px;
   transition: all 0.4s ease;
-
 }
 
 .header_tools_right a {
   font-size: 20px;
 }
-
-
 </style>

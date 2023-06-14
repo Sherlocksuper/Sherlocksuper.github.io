@@ -18,6 +18,7 @@ export default {
 <template>
   <div class="header_total">
     <div class="header_contents">
+      <h1 class="header_main_logo">Sherlock</h1>
       <header_social_media class="header_social_media"></header_social_media>
       <header_magic_scroll-text class="header_magic_text"></header_magic_scroll-text>
     </div>
@@ -40,16 +41,27 @@ export default {
   position: relative;
 }
 
+.header_main_logo{
+  font-size: 140px;
+  font-family: "Brush Script MT",cursive;
+  font-weight: 100;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .header_social_media {
   position: absolute;
-  top: 77%;
+  top: 60%;
 }
 
 .header_magic_text {
   width: 100%;
   height: auto;
   position: absolute;
-  top: 85%;
+  top: 65%;
 }
 
 

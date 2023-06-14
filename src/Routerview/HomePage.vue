@@ -83,22 +83,18 @@ export default {
 
 .total::-webkit-scrollbar {
   width: 6px;
-  background-color: transparent;
+  background-color: white;
 }
 
 .total::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background-color: #555;
+  background-color: #ff889e;
   background-clip: padding-box;
-}
-
-.total::-webkit-scrollbar-thumb:hover {
-  background-color: white;
 }
 
 .header {
   width: 100%;
-  height: 65%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;

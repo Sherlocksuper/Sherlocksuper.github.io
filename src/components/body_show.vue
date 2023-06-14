@@ -1,5 +1,5 @@
 <script>
-import body_side_card from "@/components/components-body/body_sider_card.vue"
+import body_side_card from "@/components/components-body/body_side_card.vue"
 import body_list_item from "@/components/components-body/body_list_item.vue";
 
 export default {
@@ -29,7 +29,7 @@ export default {
 <template>
   <div class="body_total">
     <div class="body_main">
-      <body_list_item v-for="picUrl in list_info" :url="picUrl"></body_list_item>
+      <body_list_item v-for="(picUrl, index) in list_info" :url="picUrl" :index="index % 2"></body_list_item>
     </div>
     <body_side_card class="body_side_me"></body_side_card>
   </div>
@@ -44,20 +44,19 @@ export default {
 
 .body_total {
   margin: auto;
-  width: 80%;
-  border: 1px solid red;
+  width: 100%;
   height: auto;
-  position: relative;
   display: flex;
-  justify-content: space-between;
-  align-items: start;
+  justify-content: center;
+  align-items: flex-start;
   flex-direction: row;
+  background-color: white;
+  position: relative;
 }
 
 .body_main {
-  width: 75%;
+  width: 60%;
   height: auto;
-  border: 4px solid green;
   border-radius: 5px;
   display: flex;
   justify-content: space-evenly;
@@ -67,10 +66,9 @@ export default {
 
 .body_side_me {
   width: 23%;
-  height: 200px;
+  height: auto;
   border-radius: 5px;
-  margin: 20px auto;
-
+  margin-top: 20px;
 }
 
 </style>
