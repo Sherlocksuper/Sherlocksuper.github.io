@@ -11,9 +11,6 @@ export default {
   mounted() {
   },
   methods: {
-    test() {
-      window.scrollTo(0, 0);
-    }
   },
 };
 
