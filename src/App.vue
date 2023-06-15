@@ -1,132 +1,62 @@
+<script setup>
+import foot_tools from "@/components/components-foot/foot_tools.vue";
+</script>
 <script>
-import header_show from './components/my_icons/header_show.vue';
-import body_show from "@/components/my_icons/body_show.vue";
-
 export default {
-  name: 'App',
-  components: {
-    body_show,
-    header_show,
-  },
+  name: "App",
+  components: {},
   data() {
-    return {
-      mainpage: 'page',
-      prepared: false,
-    };
+    return {};
   },
   mounted() {
-    let pageFadeTimer = setTimeout(() => {
-      this.prepared = true;
-    }, 10);
   },
-  methods: {}
+  methods: {
+    test() {
+      window.scrollTo(0, 0);
+    }
+  },
 };
+
 </script>
-
-<template>
-  <div :class="[mainpage,{act:prepared}]">
-    <div class="total">
-      <div class="header">
-        <header_show></header_show>
-      </div>
-      <div class="body">
-        <body_show></body_show>
-      </div>
-      <div class="footer"></div>
-    </div>
-    <img class="total_background" src="../src/pic/img_1.png" alt="">
+<template style="overflow-x: hidden">
+  <div class="my_app">
+    <router-view></router-view>
   </div>
+  <foot_tools class="foot_tools"></foot_tools>
 </template>
-
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.page {
+.my_app {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
   top: 0;
   left: 0;
-  transition: 1s;
-  opacity: 0;
-  background-color: black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.page.act {
-  transition: 1s;
-  opacity: 1;
-}
-
-.total_background {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 100%;
-  object-fit: cover;
-  filter: blur(5px);
-  opacity: 40%;
-}
-
-.total {
-  z-index: 1;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  height: 100%;
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 
-.total::-webkit-scrollbar {
+router-view {
+  z-index: 0;
+}
+
+.foot_tools {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  width: 50px;
+  z-index: 1;
+}
+
+.my_app::-webkit-scrollbar {
   width: 6px;
-  background-color: transparent;
-}
-
-.total::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  background-color: #555;
-  background-clip: padding-box;
-}
-
-.total::-webkit-scrollbar-thumb:hover {
   background-color: white;
 }
 
-.header {
-  width: 100%;
-  height: 65%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  color: white;
+.my_app::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #ff889e;
+  background-clip: padding-box;
 }
 
-.header header_show {
-  margin-top: 20px;
-  top: 80px;
-}
 
-.body {
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-header_show {
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-}
 </style>
