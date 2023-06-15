@@ -5,13 +5,13 @@
 <template>
   <div class="header_social_media_pic">
     <a target="_blank" href="https://github.com/sherlocksuper">
-      <img src="src/pic/icons/iconmonstr-wechat-5-240.png" alt="">
+      <img src="../../pic/icons/iconfont_wechat.png" alt="">
     </a>
     <a target="_blank" href="https://github.com/sherlocksuper">
-      <img src="src/pic/icons/iconmonstr-github-5-240.png" alt="">
+      <img src="../../pic/icons/iconfont_github.png" alt="">
     </a>
     <a>
-      <img src="src/pic/icons/iconmonstr-email-3-240.png" alt="">
+      <img src="../../pic/icons/iconfont_email.png" alt="">
     </a>
   </div>
 </template>
