@@ -24,6 +24,7 @@ export default {
 </script>
 
 <template>
+  <div class="white_cloth"></div>
   <div :class="[mainPage,{act:prepared}]">
     <div class="total">
       <header_show class="header"></header_show>
@@ -39,6 +40,14 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.white_cloth {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: -1;
 }
 
 .page {

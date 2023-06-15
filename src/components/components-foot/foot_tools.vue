@@ -3,6 +3,7 @@ import {Check, Checked, Edit, Setting, Top} from "@element-plus/icons-vue";
 </script>
 
 <script>
+
 export default {
   name: "foot_tools",
   components: {},
@@ -12,18 +13,25 @@ export default {
   mounted() {
   },
   methods: {
+    scrollToTop() {
+      let element = document.querySelector('.my_app');
+      element.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
   },
 };
 </script>
 <template>
   <div class="foot-tools-list">
-    <button class="ftl-item" @click="scrollToTop">
-      <Top style="width: 20px;height: 20px"></Top>
+    <button class="ftl-item" @click="scrollToTop()">
+      <top style="width: 20px;height: 20px"></top>
     </button>
 
     <input type="checkbox">
     <button class="ftl-item settingBtn" style="z-index: 1">
-      <Setting class="setting"></Setting>
+      <setting class="setting"></setting>
     </button>
 
     <button class="ftl-item hidden"></button>
@@ -82,6 +90,10 @@ input {
 
 input:checked ~ .hidden {
   width: 40px;
+}
+
+input:checked ~ .settingBtn .setting {
+  animation: rotate 2s linear infinite reverse;
 }
 
 .setting {

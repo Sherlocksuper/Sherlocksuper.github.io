@@ -12,7 +12,7 @@ export default defineConfig({
         }
     },
     build: {
-        rollupOptions: {
-        }
+        chunkSizeWarningLimit: 4000
     }
+
 })
