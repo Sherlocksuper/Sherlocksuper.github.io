@@ -40,6 +40,7 @@ export default {
   width: 0;
   white-space: nowrap;
   overflow: hidden;
+  color: white;
 }
 
 .header_contents-enter-active {

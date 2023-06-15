@@ -42,11 +42,14 @@ export default {
   box-sizing: border-box;
 }
 
+* div{
+  display: flex;
+}
+
 .body_total {
   margin: auto;
   width: 100%;
   height: auto;
-  display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: row;
@@ -58,7 +61,6 @@ export default {
   width: 60%;
   height: auto;
   border-radius: 5px;
-  display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;

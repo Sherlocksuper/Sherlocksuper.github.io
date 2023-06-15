@@ -55,13 +55,13 @@ a:hover::after {
 
 .header_tools {
   position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: auto;
   width: 100%;
   top: 20px;
   left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   z-index: 2;
 }
 

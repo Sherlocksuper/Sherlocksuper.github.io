@@ -26,9 +26,7 @@ export default {
 <template>
   <div :class="[mainPage,{act:prepared}]">
     <div class="total">
-      <div class="header">
-        <header_show></header_show>
-      </div>
+      <header_show class="header"></header_show>
       <body_show class="body"></body_show>
       <div class="footer"></div>
     </div>
@@ -47,7 +45,6 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   top: 0;
   left: 0;
   transition: 1s;
@@ -78,27 +75,11 @@ export default {
   align-items: center;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
-}
-
-.total::-webkit-scrollbar {
-  width: 6px;
-  background-color: white;
-}
-
-.total::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  background-color: #ff889e;
-  background-clip: padding-box;
 }
 
 .header {
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  color: white;
 }
 
 .header header_show {

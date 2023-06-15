@@ -17,7 +17,7 @@ export default {
 
 <template>
   <div class="side_card_total">
-    <img class="side_card_head" src="../../pic/icons/head_pic.jpg">
+    <img class="side_card_head" src="../../pic/icons/head_pic.jpg" alt="">
     <h1 class="side_card_name">Sherlock</h1>
     <header_social_media class="side_card_social_media"></header_social_media>
   </div>
@@ -42,6 +42,7 @@ export default {
   width: 100px;
   border-radius: 50%;
   transition: all 1s;
+  margin-top: 20px;
 }
 
 .side_card_head:hover {

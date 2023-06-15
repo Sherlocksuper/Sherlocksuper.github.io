@@ -9,16 +9,15 @@ export default {
     return {};
   },
   mounted() {
-    console.log(this.index);
   },
 };
 </script>
 <template>
-  <div class="body_list_item_total" :class="{isReverse:index===1}">
+  <div class="body_list_item_total" :class="{isReverse:this.index===1}">
     <div class="item_img_box">
       <img :src=url alt="">
     </div>
-    <div class="item_content">
+    <div class="item_content" >
       <h1 class="item_content_title">{{ this.index }}</h1>
       <p class="item_content_content">content</p>
     </div>
@@ -52,14 +51,12 @@ export default {
 }
 
 .item_img_box {
-  width: 35%;
+  width: 40%;
   height: 100%;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  border: 1px solid red;
 }
 
 .item_img_box img {
@@ -77,13 +74,19 @@ export default {
 
 .item_content {
   position: relative;
-  width: 65%;
+  width: 55%;
   height: 95%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 1px solid red;
+  margin-left: 40px;
+  margin-right: 80px;
+}
+
+.body_list_item_total.isReverse .item_content{
+  margin-left: 100px;
+  margin-right: 0;
 }
 
 .item_content_title {
@@ -92,8 +95,8 @@ export default {
   font-size: 30px;
   font-weight: bold;
   text-align: start;
-  border: 1px solid red;
 }
+
 
 .item_content_content {
   width: 96%;
@@ -101,7 +104,5 @@ export default {
   font-size: 20px;
   margin-top: 5px;
   text-align: start;
-  border: 1px solid red;
 }
-
 </style>

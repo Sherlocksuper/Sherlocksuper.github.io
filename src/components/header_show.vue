@@ -1,22 +1,28 @@
 <script>
 import header_social_media from "@/components/components-header/header_social_media.vue";
 import header_magic_scrollText from "@/components/components-header/header_magic_scrollText.vue"
+import header_nav from "@/components/components-header/header_nav.vue";
 
 export default {
 
   name: "header_show",
-  data() {return {};},
-  mounted() {},
+  data() {
+    return {};
+  },
+  mounted() {
+  },
   methods: {},
   components: {
     header_social_media,
     header_magic_scrollText,
+    header_nav,
   }
 };
 
 </script>
 <template>
   <div class="header_total">
+    <header_nav></header_nav>
     <div class="header_contents">
       <h1 class="header_main_logo">Sherlock</h1>
       <header_social_media class="header_social_media"></header_social_media>
@@ -41,9 +47,9 @@ export default {
   position: relative;
 }
 
-.header_main_logo{
+.header_main_logo {
   font-size: 140px;
-  font-family: "Brush Script MT",cursive;
+  font-family: "Brush Script MT", cursive;
   font-weight: 100;
   color: white;
   position: absolute;
