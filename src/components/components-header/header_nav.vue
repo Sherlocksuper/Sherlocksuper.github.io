@@ -12,12 +12,12 @@ export default {
 </script>
 <template>
   <nav class="header_tools">
-    <router-link id="sherlock_logo" to="homepage">sherlock</router-link>
+    <router-link id="sherlock_logo" to="Homepage" class="head_text_element">sherlock</router-link>
     <img class="header_my_headPic" src="../../pic/icons/head_pic.jpg" alt="">
     <div class="header_tools_right">
-      <router-link to="Time">时间</router-link>
-      <router-link to="Time">关于</router-link>
-      <router-link to="Time">关于</router-link>
+      <router-link to="Time" class="head_text_element">时间</router-link>
+      <router-link to="Time" class="head_text_element">关于</router-link>
+      <router-link to="Time" class="head_text_element">关于</router-link>
     </div>
   </nav>
 </template>
@@ -30,14 +30,13 @@ export default {
 
 a {
   text-decoration: none;
-  color: white;
   margin: 0 10px 0 20px;
   border-radius: 5px;
   font-size: 25px;
   font-weight: 150;
   font-family: "Comic Sans MS", cursive, sans-serif;
   writing-mode: horizontal-tb;
-  white-space: nowrap;
+  white-space: nowrap
 }
 
 a::after {

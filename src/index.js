@@ -1,13 +1,15 @@
 import {createRouter, createWebHistory, createWebHashHistory} from 'vue-router';
 import HomePage from "@/Routerview/HomePage.vue";
 import MyTimeTravel from "@/Routerview/MyTimeTravel.vue";
+import test from "@/Routerview/test.vue";
 
 
 const routes = [
 
+
     {
         path: '/',
-        redirect: 'HomePage',
+        redirect: '/HomePage'
     },
     {
         path: '/HomePage',
@@ -18,10 +20,15 @@ const routes = [
         path: '/Time',
         name: 'Time',
         component: MyTimeTravel
+    },
+    {
+        path:'/test/:id',
+        name:'Ti',
+        component:test
     }
 ];
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes,
 });
 

@@ -23,8 +23,8 @@ export default {
 <template>
   <div class="header_total">
     <header_nav></header_nav>
-    <div class="header_contents">
-      <h1 class="header_main_logo">Sherlock</h1>
+    <div class="header_contents ">
+      <h1 class="header_main_logo head_text_element">Sherlock</h1>
       <header_social_media class="header_social_media"></header_social_media>
       <header_magic_scroll-text class="header_magic_text"></header_magic_scroll-text>
     </div>
@@ -51,7 +51,6 @@ export default {
   font-size: 140px;
   font-family: "Brush Script MT", cursive;
   font-weight: 100;
-  color: white;
   position: absolute;
   top: 50%;
   left: 50%;

@@ -27,11 +27,13 @@ export default {
 </script>
 
 <template>
-  <div class="body_total">
+  <div class="body_total body_background_element ">
     <div class="body_main">
-      <body_list_item v-for="(picUrl, index) in list_info" :url="picUrl" :index="index % 2"></body_list_item>
+      <body_list_item v-for="(picUrl, index) in list_info" :url="picUrl" :index="index"></body_list_item>
     </div>
-    <body_side_card class="body_side_me"></body_side_card>
+    <div class="body_side_me">
+      <body_side_card></body_side_card>
+    </div>
   </div>
 </template>
 
@@ -42,7 +44,7 @@ export default {
   box-sizing: border-box;
 }
 
-* div{
+* div {
   display: flex;
 }
 
@@ -53,7 +55,6 @@ export default {
   justify-content: center;
   align-items: flex-start;
   flex-direction: row;
-  background-color: white;
   position: relative;
 }
 
@@ -64,6 +65,7 @@ export default {
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
+  transition: all .5s;
 }
 
 .body_side_me {
@@ -71,6 +73,7 @@ export default {
   height: auto;
   border-radius: 5px;
   margin-top: 20px;
+  transition: all .5s;
 }
 
 </style>

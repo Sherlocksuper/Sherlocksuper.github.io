@@ -10,7 +10,6 @@ export default {
   },
   data() {
     return {
-      mainPage: 'page',
       prepared: false,
     };
   },
@@ -24,8 +23,7 @@ export default {
 </script>
 
 <template>
-  <div class="white_cloth"></div>
-  <div :class="[mainPage,{act:prepared}]">
+  <div class="page body_background_element" :class="{act:prepared}">
     <div class="total">
       <header_show class="header"></header_show>
       <body_show class="body"></body_show>
@@ -42,13 +40,6 @@ export default {
   box-sizing: border-box;
 }
 
-.white_cloth {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  z-index: -1;
-}
 
 .page {
   position: absolute;
@@ -62,6 +53,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 0;
 }
 
 .page.act {
@@ -75,7 +67,6 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(5px);
 }
 
 .total {

@@ -15,11 +15,11 @@ export default {
 <template>
   <div class=" header_contents_me">
     <transition name="header_contents" mode="out-in" @after-enter="index_show=(index_show%3)+1">
-      <h1 class="header_title" v-if="1===index_show" style="--width:23;--length:8">Hello,I am
+      <h1 class="header_title head_text_element" v-if="1===index_show" style="--width:23;--length:8">Hello,I am
         Sherlock.&#128536</h1>
-      <h1 class="header_title" v-else-if="2===index_show" style="--width: 23;--length: 6">I am a web
+      <h1 class="header_title head_text_element" v-else-if="2===index_show" style="--width: 23;--length: 6">I am a web
         developer&#128554</h1>
-      <h1 class="header_title" v-else-if="3===index_show" style="--width:17;--length:7">Trying my best&#128526</h1>
+      <h1 class="header_title head_text_element" v-else-if="3===index_show" style="--width:17;--length:7">Trying my best&#128526</h1>
     </transition>
   </div>
 </template>
@@ -40,7 +40,6 @@ export default {
   width: 0;
   white-space: nowrap;
   overflow: hidden;
-  color: white;
 }
 
 .header_contents-enter-active {

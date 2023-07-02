@@ -10,16 +10,21 @@ export default {
   },
   mounted() {
   },
+  methods: {
+    toDetailPage() {
+      this.$router.push({name: 'Ti', params: {id: this.index}})
+    }
+  },
 };
 </script>
 <template>
-  <div class="body_list_item_total" :class="{isReverse:this.index===1}">
+  <div class="body_list_item_total body_background_element" :class="{isReverse:this.index%2===1}" @click="toDetailPage">
     <div class="item_img_box">
       <img :src=url alt="">
     </div>
-    <div class="item_content" >
-      <h1 class="item_content_title">{{ this.index }}</h1>
-      <p class="item_content_content">content</p>
+    <div class="item_content">
+      <h1 class="item_content_title  body_text_element">{{ this.index }}</h1>
+      <p class="item_content_content  body_text_element">content</p>
     </div>
   </div>
 </template>
@@ -40,7 +45,6 @@ export default {
   align-items: center;
   border-radius: 10px;
   box-shadow: var(--el-box-shadow);
-  background-color: white;
   margin-top: 20px;
   overflow: hidden;
   transition: all .5s;
@@ -84,7 +88,7 @@ export default {
   margin-right: 80px;
 }
 
-.body_list_item_total.isReverse .item_content{
+.body_list_item_total.isReverse .item_content {
   margin-left: 100px;
   margin-right: 0;
 }

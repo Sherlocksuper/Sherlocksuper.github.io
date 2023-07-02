@@ -16,21 +16,22 @@ export default {
 </script>
 
 <template>
-  <div class="side_card_total">
-    <img class="side_card_head" src="../../pic/icons/head_pic.jpg" alt="">
-    <h1 class="side_card_name">Sherlock</h1>
+  <div class="side_card_total body_background_element">
+    <img class="side_card_head  body_text_element" src="../../pic/icons/head_pic.jpg" alt="">
+    <h1 class="side_card_name body_text_element">Sherlock</h1>
     <header_social_media class="side_card_social_media"></header_social_media>
   </div>
 </template>
 <style scoped>
 .side_card_total {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   box-shadow: var(--el-box-shadow);
   transition: all .5s;
-  background-color: #F2F3F5;
 }
 
 .side_card_total:hover {

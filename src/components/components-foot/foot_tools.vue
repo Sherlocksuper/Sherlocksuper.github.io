@@ -1,5 +1,5 @@
 <script setup>
-import {Check, Checked, Edit, Setting, Top} from "@element-plus/icons-vue";
+import {Check, Checked, Edit, Setting, Sunny, Switch, Top} from "@element-plus/icons-vue";
 </script>
 
 <script>
@@ -20,23 +20,44 @@ export default {
         behavior: "smooth",
       });
     },
+    changeLayout() {
+      let ele = document.querySelector('.body_main');
+      let element = document.querySelector('.body_side_me');
+      if (element.style.width === '0px') {
+        ele.style.width = '60%';
+        element.style.width = '300px';
+      } else {
+        ele.style.width = '80%';
+        element.style.width = '0px';
+      }
+    },
+    changeTheme() {
+      let theme = document.querySelector(':root');
+      console.log("origin" + theme.getAttribute('theme'));
+      if (theme.getAttribute('theme') === 'dark') {
+        theme.setAttribute('theme', 'light');
+      } else {
+        theme.setAttribute('theme', 'dark');
+      }
+    },
   },
 };
 </script>
 <template>
   <div class="foot-tools-list">
-    <button class="ftl-item" @click="scrollToTop()">
-      <top style="width: 20px;height: 20px"></top>
+    <button class="ftl-item" @click="scrollToTop">
+      <top></top>
     </button>
-
     <input type="checkbox">
     <button class="ftl-item settingBtn" style="z-index: 1">
       <setting class="setting"></setting>
     </button>
-
-    <button class="ftl-item hidden"></button>
-    <button class="ftl-item hidden"></button>
-
+    <button class="ftl-item hidden">
+      <Switch @click="changeLayout"></Switch>
+    </button>
+    <button class="ftl-item hidden">
+      <Sunny @click="changeTheme"></Sunny>
+    </button>
   </div>
 </template>
 
@@ -69,6 +90,11 @@ export default {
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
 }
 
+.ftl-item > * {
+  width: 20px;
+  height: 20px;
+}
+
 input {
   position: absolute;
   width: 40px;
@@ -92,14 +118,12 @@ input:checked ~ .hidden {
   width: 40px;
 }
 
-input:checked ~ .settingBtn .setting {
-  animation: rotate 2s linear infinite reverse;
+.setting {
+  animation: rotate 2s linear infinite
 }
 
-.setting {
-  width: 20px;
-  height: 20px;
-  animation: rotate 2s linear infinite;
+input:checked ~ .settingBtn .setting {
+  animation: rotate 2s linear infinite reverse;
 }
 
 @keyframes rotate {
