@@ -32,31 +32,31 @@ A new Flutter project.
 
 可以说,封装、整理、以及称得上是舒爽的代码结构是我在这个项目中学到的最有价值的东西
 
-![img.png](3source/analyze.png)
+<img alt="img.png" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Fanalyze.png" width="400px"/>
 
 ## 项目截图
 
-![img.png](3source/in.jpg)
+<img alt="img.png" height="400px" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Fin.jpg"/>
 
 下载功能
-![img_2.png](3source/img_2.png)
+<img alt="img_2.png" height="400px" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Fimg_2.png"/>
 
 通过android 的notification实现下载进度的展示 以及播放的控制
-![img.png](3source/notifi.jpg)
-[notification.mp4](3source/notificationAmusiclist.mp4)
+<img alt="img.png" height="400px" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Fnotifi.jpg"/>
+<video src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2FnotificationAmusiclist.mp4" controls="controls" width="400px" height="300px"></video>
 
 搜索
-![img.png](3source/search.png)
+<img alt="img.png" height="400px" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Fsearch.png"/>
 
 深色模式
-![dark mode](3source/dark.jpg)
+<img alt="dark mode" height="400px" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Fdark.jpg"/>
 
 歌单广场
-![img_1.png](3source/img_1.png)
-![img_3.png](3source/img_3.png)
+<img alt="img_1.png" height="400px" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Fimg_1.png"/>
+<img alt="img_3.png" height="400px" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Fimg_3.png"/>
 
 批量管理
-[playlist](3source/addtoplaylist.mp4)
+<img alt="playlist" height="400px" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Faddtoplaylist.mp4"/>
 
 ## “分析”
 
@@ -69,6 +69,6 @@ A new Flutter project.
 才发现，这样的组织结构，对于前端来说,是非常不友好的
 至少对一个未从头参与开发的初级学习者来说是这样的
 
-![img.png](3source/img.png)
+<img alt="img.png" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Fimg.png" width="400px"/>
 
-![img.png](3source/img23.png)
+<img alt="img.png" src="https://sherlock-1314462060.cos.ap-nanjing.myqcloud.com/self-page/3source%2Fimg23.png" width="400px"/>
