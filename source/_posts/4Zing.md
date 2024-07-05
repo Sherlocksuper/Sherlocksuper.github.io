@@ -1,7 +1,7 @@
 ---
 layout: posts
 title: Zing 一款前后端独立gpt软件
-subtitle: 一些总结
+subtitle: 本文介绍作者作为独立开发者，完成的一款前后端独立开发的gpt软件，包括了一些技术细节以及界面展示 
 date: 2024-3-23 21:23:29
 updated:
 tags:

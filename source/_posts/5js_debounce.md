@@ -1,7 +1,7 @@
 ---
 layout: posts
 title: 简单的防抖及其迭代
-subtitle: 一些总
+description: 本文主要讲述了防抖的基本原理，以及在实际开发中的应用，以及一些迭代
 date: 2024-4.20 16.36
 updated:
 tags:
