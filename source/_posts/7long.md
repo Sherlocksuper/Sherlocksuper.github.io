@@ -1,7 +1,7 @@
 ---
 layout: epost
 title: 龙芯开发板
-subtitle: 本文记录了作者第一次接触开发板的一些经历，仅作为记录
+description: 本文记录了作者第一次接触开发板的一些经历，仅作为记录
 date: 2024-06-15 07:19:29
 tags:
   - development

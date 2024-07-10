@@ -1,9 +1,8 @@
 ---
 title: 记录一次开源经历--Ospp
-subtitle: 一个企业级Ai提供者Casibase
+description: Ospp开源项目———— Casbin社区一个企业级Ai提供者Casibase
 date: 2024-6-15 10:47:29
 updated:
-description:
 top_img:
 tags:
   - 开源
