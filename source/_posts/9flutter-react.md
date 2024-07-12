@@ -1,6 +1,7 @@
 ---
 title: 从Flutter到React,架空用户的性能宰相
 subTitle: 大义觉迷录
+description: 本文将会以Flutter和React的渲染原理为主线，讲述不同框架之间的差异与共性,并且以此为基础，探讨性能优化的一些原则
 date: ':year-:month-:day :hour:00:00'
 updated:
 top_img:
@@ -322,8 +323,6 @@ Commit阶段
 2. 正式提交执行副作用
 
 因为Effect 会导致用户可见的界面的改变，所以必须是同步的
-
-
 
 # 回归主题：性能
 
