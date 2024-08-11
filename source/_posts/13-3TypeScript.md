@@ -16,12 +16,14 @@ interface和type
 2. 类型别名不能被或者extends、implements其他类型，interface对于拓展是开放的
 3. 多个同名的interface会合并（相同属性声明为不同类型时候会报错），type则会报错
 4. type可以表示联合类型和交叉类型，interface则会报错
+5. 使用tsc编译之后,type不会存在，因为他只是“引用”,interface也不会存在，因为他只是“规范”
+6. 如果使用type something = string，type依旧不会存在
 
     ```jsx
     type Animal = "fish" | "cow"
     interface Animal = "fish" | "cow" //报错
     ```
-
+   
 
 # ★★反向映射★★
 
