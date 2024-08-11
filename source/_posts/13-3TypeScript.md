@@ -1,8 +1,8 @@
 ---
-title: TypeScript精华汇总
+title: TypeScript All
 date: ':year-:month-:day :hour:00:00'
 updated:
-description:
+description: 对于前两部分typescript较为精华的部分的总结
 top_img:
 tags:
   - 本手
@@ -90,4 +90,53 @@ console.log(greeter.greet());
 2. 如果构造函数的prototype是一个对象，那么把newInstance的原型指向prototype，否则newInstance为一个普通对象，原型为Object.prototype
 3. 使用给定参数执行构造函数，并把newInstance绑定为this上下文
 4. 如果构造函数返回非原始值，则返回值为new的结果，否则返回newInstance
+
+# any 和 unknow的区别
+
+1. unknow是类型安全的any，unknow类型的值只能赋值给unknow和any类型的变量
+2. any类型的值可以赋值给任何类型的变量
+3. any 类型是TypeScript中最不安全的类型，它允许赋值给任何类型，也可以从任何类型赋值过来。这意味着使用 any 类型时，TypeScript不会进行任何类型检查，这基本上和使用JavaScript的动态类型特性一样。 
+4. unknown 类型是TypeScript中安全类型的一种，它是 any 类型的类型安全版本。使用 unknown 类型时，你必须先对变量进行检查或类型守卫，才能访问其属性或调用其方法。
+
+举个例子
+```javascript
+function processAny(value: any) {
+    console.log(value.toUpperCase()); // 假设 value 是一个字符串
+    return value * 10; // 这里 TypeScript 不会报错，即使 value 不是数字
+}
+function processUnknow(value: unknow) {
+   console.log(value.toUpperCase()); // 假设 value 是一个字符串
+   return value * 10; // 这里 TypeScript 不会报错，即使 value 不是数字
+}
+processAny(123)
+processAny("123")
+processUnknow(123)
+processUnknow("123")
+```
+
+在这个例子里，processAny的两个都不会报错
+processUnknown的两个调用都会报错，如果不希望报错
+我们需要：
+```javascript
+function processUnknow(value: unknow) {
+  if (typeof value === "string"){
+     console.log(value.toUpperCase()); // 假设 value 是一个字符串
+  }
+  if (typeof value === "number"){
+     return value * 10; // 这里 TypeScript 不会报错，即使 value 不是数字
+  }
+  return "1"
+}
+```
+在调用之前进行类型断言
+
+# typescript 是怎么进行类型检查的，在哪个阶段发挥作用
+
+TypeScript 代码首先通过 TypeScript 编译器（tsc）进行编译。编译过程主要包括以下几个阶段：
+
+1. 解析：将 TypeScript 代码解析成抽象语法树（AST）。 
+2. 类型检查：在 AST 上进行类型检查，确保代码符合类型系统的要求。
+3. 转换：将 TypeScript 代码转换成等价的 JavaScript 代码。包括: 处理 TypeScript 特有的语法，如类型注解、接口、类等，并将其转换为 JavaScript 语法。
+4. 输出：生成编译后的 JavaScript 代码，通常是一个或多个 .js 文件。
+
 
