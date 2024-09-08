@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>前后端（React + Node）项目部署全流程及常见问题解析 | sherlock</title><meta name="author" content="Sherlock"><meta name="copyright" content="Sherlock"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文详细记录了前后端项目（React + Node）部署过程中遇到的各种问题和解决方案，包括NVM、Node、npm、Linux大小写敏感、用户权限、SSH进程等关键点，旨在为开发者提供参考。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端（React + Node）项目部署全流程及常见问题解析">
+<meta property="og:url" content="http://example.com/2024/09/08/14deploy/index.html">
+<meta property="og:site_name" content="sherlock">
+<meta property="og:description" content="本文详细记录了前后端项目（React + Node）部署过程中遇到的各种问题和解决方案，包括NVM、Node、npm、Linux大小写敏感、用户权限、SSH进程等关键点，旨在为开发者提供参考。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/head.png">
+<meta property="article:published_time" content="2024-09-08T11:33:24.931Z">
+<meta property="article:modified_time" content="2024-09-08T13:34:14.622Z">
+<meta property="article:author" content="Sherlock">
+<meta property="article:tag" content="妙手">
+<meta property="article:tag" content="开发">
+<meta property="article:tag" content="部署">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/head.png"><link rel="shortcut icon" href="/img/head.png"><link rel="canonical" href="http://example.com/2024/09/08/14deploy/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前后端（React + Node）项目部署全流程及常见问题解析',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-08 21:34:14'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/bg1.png')"><nav id="nav"><span id="blog-info"><a href="/" title="sherlock"><span class="site-name">sherlock</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">前后端（React + Node）项目部署全流程及常见问题解析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-08T11:33:24.931Z" title="发表于 2024-09-08 19:33:24">2024-09-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-08T13:34:14.622Z" title="更新于 2024-09-08 21:34:14">2024-09-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="前后端（React + Node）项目部署全流程及常见问题解析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>粗糙，仅留档供个人使用<br>记录一下部署用到的工具以及踩过的坑</p>
+<p>项目:</p>
+<ol>
+<li>前端： javascript、react、vite</li>
+<li>后端： node</li>
+<li>typescript</li>
+</ol>
+<p>当然不止这些，不过其他框架、工具之类的，不记也罢</p>
+<h1 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h1><ol>
+<li>购买一台服务器</li>
+<li>配置环境</li>
+<li>把项目放到服务器上(是否打包看个人情况)</li>
+<li>运行</li>
+</ol>
+<p>其中购买服务器暂且按下不表</p>
+<h1 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h1><h2 id="安装node环境和npm-配套镜像"><a href="#安装node环境和npm-配套镜像" class="headerlink" title="安装node环境和npm (配套镜像)"></a>安装node环境和npm (配套镜像)</h2><p>此处使用nvm<br>node version manager (node 版本管理工具)</p>
+<p>github网址：<a target="_blank" rel="noopener" href="https://github.com/nvm-sh/nvm">https://github.com/nvm-sh/nvm</a></p>
+<h3 id="安装nvm"><a href="#安装nvm" class="headerlink" title="安装nvm"></a>安装nvm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash</span><br><span class="line"></span><br><span class="line"># or</span><br><span class="line"></span><br><span class="line">wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用镜像"><a href="#使用镜像" class="headerlink" title="使用镜像"></a>使用镜像</h3><p>如果安装nvm太慢,可以使用淘宝镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node</span><br><span class="line">curl -o- https://npmmirror.com/mirrors/nvm/install.sh | bash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h3><p>安装完成后，运行以下命令来加载 NVM：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line">如果是Zsh</span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>或者运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export NVM_DIR=&quot;$([ -z &quot;$&#123;XDG_CONFIG_HOME-&#125;&quot; ] &amp;&amp; printf %s &quot;$&#123;HOME&#125;/.nvm&quot; || printf %s &quot;$&#123;XDG_CONFIG_HOME&#125;/nvm&quot;)&quot;</span><br><span class="line">  [ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</span><br></pre></td></tr></table></figure>
+
+<p>第一行设置了一个环境变量 $NVM_DIR，它指向 NVM 的安装目录。<br>第二行检查 $NVM_DIR&#x2F;nvm.sh 文件是否存在，如果存在，就执行它。这一步是加载 NVM 的必要步骤。</p>
+<p>确保 NVM 正确安装，您可以运行以下命令检查 NVM 版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm --version</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>使用 NVM 安装 Node.js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nvm install --lts</span><br><span class="line"></span><br><span class="line">node --version</span><br></pre></td></tr></table></figure>
+
+<p>如果想安装或切换到其他版本的 Node.js，可以运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm install &lt;version&gt;</span><br><span class="line">nvm use &lt;version&gt;</span><br></pre></td></tr></table></figure>
+
+<p>例如，安装并使用 Node.js 16：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm install 16</span><br><span class="line">nvm use 16</span><br></pre></td></tr></table></figure>
+
+<h3 id="npm镜像"><a href="#npm镜像" class="headerlink" title="npm镜像"></a>npm镜像</h3><p>在安装npm 包的时候可能会比较慢，配置国内镜像</p>
+<p>腾讯云镜像源<br>npm config set registry <a target="_blank" rel="noopener" href="http://mirrors.cloud.tencent.com/npm/">http://mirrors.cloud.tencent.com/npm/</a></p>
+<p>淘宝镜像源<br>npm config set registry <a target="_blank" rel="noopener" href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a></p>
+<p>华为云镜像源<br>npm config set registry <a target="_blank" rel="noopener" href="https://mirrors.huaweicloud.com/repository/npm/">https://mirrors.huaweicloud.com/repository/npm/</a></p>
+<h2 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h2><h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line"></span><br><span class="line">sudo apt install git</span><br><span class="line"></span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot; -b 4096</span><br></pre></td></tr></table></figure>
+
+<p>其中<br>-t 是加密方式<br>-C 是常用的email标识号(亲测配不配email似乎没用)<br>-b 生成的密钥大小，不配也行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//查看私钥</span><br><span class="line">cat ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line">// 查看公钥</span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>查看并复制公钥<br>打开github的setting</p>
+<p><img src="/2024/09/08/14deploy/ssh_step1.png" alt="img.png"></p>
+<p><img src="/14deploy/ssh_step2.png" alt="img.png"></p>
+<p>之后就可以使用ssh拉取代码啦</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone xxxx</span><br></pre></td></tr></table></figure>
+
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>推荐一个工具:<strong>finalshell</strong></p>
+<p>图形化ssh、fcp协议</p>
+<h2 id="不打包部署"><a href="#不打包部署" class="headerlink" title="不打包部署"></a>不打包部署</h2><p>这一部分比较简单</p>
+<p>首先通过git拉取对应的文件<br>以下是我的文件夹<br>–back_end<br>|_front_end</p>
+<p>其中<br>back_end是后端node程序，通过npm start启动，<br>front_end是vite，通过npm run dev启动</p>
+<p>小tips:<br>通过package.json脚本可以一键启动多个程序</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;concurrently&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^8.2.2&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;start-all&quot;</span><span class="punctuation">:</span> <span class="string">&quot;concurrently \&quot;npm start --prefix back_end\&quot; \&quot;npm run dev --prefix front_end\&quot; &quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>–prefix： 在当前文件夹的某个目录运行</p>
+<p>之后在根目录运行即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm run start-all</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="打包部署"><a href="#打包部署" class="headerlink" title="打包部署"></a>打包部署</h2><h1 id="重要问题"><a href="#重要问题" class="headerlink" title="重要问题"></a>重要问题</h1><h2 id="大小写敏感问题"><a href="#大小写敏感问题" class="headerlink" title="大小写敏感问题"></a>大小写敏感问题</h2><p>windows系统对于文件路径和文件名大小写是<strong>不敏感的</strong></p>
+<p>比如 import 路径<br>.&#x2F;Test&#x2F;photo.tsx<br>和 实际路径<br>.&#x2F;test&#x2F;Photo.tsx</p>
+<p>在window系统上，如果你开发的时候把test目录改成了Test目录<br>git是<strong>不会识别</strong>到更改的</p>
+<p>但是linux在上面的导入中，会报错</p>
+<p>window启用大小写敏感：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsutil file setCaseSensitiveInfo &quot;C:\your\folder\path&quot; enable</span><br></pre></td></tr></table></figure>
+
+<p>把”C:\your\folder\path” 替换为你的文件目录名<br>不过只能对空目录用，先把文件转移除去，设置之后再放回来</p>
+<h2 id="Linux进程相关（如何保活后台应用-）"><a href="#Linux进程相关（如何保活后台应用-）" class="headerlink" title="Linux进程相关（如何保活后台应用 ?）"></a>Linux进程相关（如何保活后台应用 ?）</h2><p>在linux中，有下面几个概念：</p>
+<p>概念 描述<br><strong>进程组</strong>：一个或多个进程的集合，每一个进程组都有唯一一个进程组ID，即进程组<br><strong>会话器</strong>：一个或多个进程组的集合，有唯一一个会话期首进程（session leader）. 会话期ID为首进程的ID<br>控制进程:与控制终端连接的会话期首进程叫做控制进程</p>
+<p>当用户登录到一个终端时，系统会为这个登录会话创建一个<strong>会话（session</strong>）。从用户登录到退出的整个过程中，所有在这个终端上运行的进程都属于同一个会话。</p>
+<p><img src="/2024/09/08/14deploy/lunux_process.png" alt="img.png"></p>
+<h3 id="进程和进程组："><a href="#进程和进程组：" class="headerlink" title="进程和进程组："></a>进程和进程组：</h3><p>每个进程都有一个独立的进程ID（PID），但它们还归属于一个更大的组织单位，称为<br>进程组。一个进程组可以包含多个进程，并且有一个唯一的进程组ID。进程组允许多个进程一起执行操作，比如使用管道符号 “|” 连接的命令。</p>
+<h3 id="会话和会话首进程："><a href="#会话和会话首进程：" class="headerlink" title="会话和会话首进程："></a>会话和会话首进程：</h3><p>一个 会话 包含一个或多个进程组。每个会话都有一个唯一的领导者进程，称为 <strong>会话首进程，并且它的ID就是会话的ID</strong>。</p>
+<h3 id="控制进程和控制终端："><a href="#控制进程和控制终端：" class="headerlink" title="控制进程和控制终端："></a>控制进程和控制终端：</h3><p>当一个会话与一个终端（如SSH连接的终端）关联时，负责与这个终端通信的进程就是<br>控制进程，它通常是会话首进程。当终端检测到网络断开时，会向控制进程发送一个挂断信号（SIGHUP）。</p>
+<h3 id="挂断信号的传播："><a href="#挂断信号的传播：" class="headerlink" title="挂断信号的传播："></a>挂断信号的传播：</h3><p>如果控制进程收到SIGHUP信号并退出，会话中的所有前台进程组也会受到影响并终止。如果某个进程组中的进程已经停止，系统还会发送SIGHUP和SIGCONT信号，尝试重新启动它们。</p>
+<p>最后:<br>当SSH会话断开时，系统会给控制进程发送一个SIGHUP信号，导致整个会话中的进程都被终止。这就是为什么当SSH连接关闭后，正在执行的任务也会随之取消。<br>简而言之，SSH会话打开时运行的所有命令和进程（如bash）<strong>都是它的子进程</strong>。一旦SSH连接断开，系统会终止所有相关进程，导致未完成的任务被取消。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Sherlock</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/09/08/14deploy/">http://example.com/2024/09/08/14deploy/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">sherlock</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%A6%99%E6%89%8B/">妙手</a><a class="post-meta__tags" href="/tags/%E5%BC%80%E5%8F%91/">开发</a><a class="post-meta__tags" href="/tags/%E9%83%A8%E7%BD%B2/">部署</a></div><div class="post_share"><div class="social-share" data-image="/img/head.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/08/06/13-3TypeScript/" title="TypeScript All"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">TypeScript All</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/03/23/4Zing/" title="Zing 一款前后端独立gpt软件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-23</div><div class="title">Zing 一款前后端独立gpt软件</div></div></a></div><div><a href="/2024/07/10/9flutter-react/" title="从Flutter到React,架空用户的性能宰相"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-10</div><div class="title">从Flutter到React,架空用户的性能宰相</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sherlock</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Sherlocksuper" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1075773551@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">如果能注意到这里的话，我想提醒你，要注意每篇博客的题记和尾记</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">大致流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">配置环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85node%E7%8E%AF%E5%A2%83%E5%92%8Cnpm-%E9%85%8D%E5%A5%97%E9%95%9C%E5%83%8F"><span class="toc-number">2.1.</span> <span class="toc-text">安装node环境和npm (配套镜像)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nvm"><span class="toc-number">2.1.1.</span> <span class="toc-text">安装nvm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%95%9C%E5%83%8F"><span class="toc-number">2.1.2.</span> <span class="toc-text">使用镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB"><span class="toc-number">2.1.3.</span> <span class="toc-text">激活</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Node-js"><span class="toc-number">2.1.4.</span> <span class="toc-text">安装Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm%E9%95%9C%E5%83%8F"><span class="toc-number">2.1.5.</span> <span class="toc-text">npm镜像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGit"><span class="toc-number">2.2.</span> <span class="toc-text">配置Git</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85git"><span class="toc-number">2.2.1.</span> <span class="toc-text">安装git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AESSH"><span class="toc-number">2.2.2.</span> <span class="toc-text">配置SSH</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number">3.</span> <span class="toc-text">部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2"><span class="toc-number">3.1.</span> <span class="toc-text">不打包部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2"><span class="toc-number">3.2.</span> <span class="toc-text">打包部署</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">重要问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F%E9%97%AE%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">大小写敏感问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E8%BF%9B%E7%A8%8B%E7%9B%B8%E5%85%B3%EF%BC%88%E5%A6%82%E4%BD%95%E4%BF%9D%E6%B4%BB%E5%90%8E%E5%8F%B0%E5%BA%94%E7%94%A8-%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">Linux进程相关（如何保活后台应用 ?）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%E7%BB%84%EF%BC%9A"><span class="toc-number">4.2.1.</span> <span class="toc-text">进程和进程组：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%92%8C%E4%BC%9A%E8%AF%9D%E9%A6%96%E8%BF%9B%E7%A8%8B%EF%BC%9A"><span class="toc-number">4.2.2.</span> <span class="toc-text">会话和会话首进程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E8%BF%9B%E7%A8%8B%E5%92%8C%E6%8E%A7%E5%88%B6%E7%BB%88%E7%AB%AF%EF%BC%9A"><span class="toc-number">4.2.3.</span> <span class="toc-text">控制进程和控制终端：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E6%96%AD%E4%BF%A1%E5%8F%B7%E7%9A%84%E4%BC%A0%E6%92%AD%EF%BC%9A"><span class="toc-number">4.2.4.</span> <span class="toc-text">挂断信号的传播：</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/08/14deploy/" title="前后端（React + Node）项目部署全流程及常见问题解析">前后端（React + Node）项目部署全流程及常见问题解析</a><time datetime="2024-09-08T11:33:24.931Z" title="发表于 2024-09-08 19:33:24">2024-09-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/06/13-3TypeScript/" title="TypeScript All">TypeScript All</a><time datetime="2024-08-06T00:19:06.929Z" title="发表于 2024-08-06 08:19:06">2024-08-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/04/13.2TypeScript/" title="TypeScript Part2">TypeScript Part2</a><time datetime="2024-08-04T08:17:59.578Z" title="发表于 2024-08-04 16:17:59">2024-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/04/13.1TypeScript/" title="TypeScript Part1">TypeScript Part1</a><time datetime="2024-08-04T00:32:53.801Z" title="发表于 2024-08-04 08:32:53">2024-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/27/12what-I-Do-GLCC/" title="参与开源四个月，我干了什么？">参与开源四个月，我干了什么？</a><time datetime="2024-07-27T10:48:43.325Z" title="发表于 2024-07-27 18:48:43">2024-07-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Sherlock</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
