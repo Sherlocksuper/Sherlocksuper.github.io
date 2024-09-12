@@ -1,4 +1,14 @@
-# Avatar (頭像)
+inject:
+  head:
+    - <link rel="apple-touch-icon" sizes="180x180" href="/assets/xaoxuu/favicon/apple-touch-icon.png">
+    - <link rel="icon" type="image/png" sizes="32x32" href="/assets/xaoxuu/favicon/favicon-32x32.png">
+    - <link rel="icon" type="image/png" sizes="16x16" href="/assets/xaoxuu/favicon/favicon-16x16.png">
+    - <link rel="manifest" href="/assets/xaoxuu/favicon/site.webmanifest">
+    - <link rel="shortcut icon" href="/assets/xaoxuu/favicon/favicon.ico">
+    - <meta name="theme-color" content="#f8f8f8">
+    - <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css" media="all" />
+
+    # Avatar (頭像)
 avatar:
   img: /_img/head.jpg
   effect: true
@@ -19,17 +29,17 @@ logo:
   title: '[{config.title}](/)' # you can set html tag like: '[<img no-lazy height="32px" src="xxx"/>](/)'
   subtitle: 探索代码与创意的交汇点 | 用技术构建未来的想象
 
-#footer:
-#  social:
-#    github:
-#      icon: '<img src="https://avatars.githubusercontent.com/u/116318567?s=400&u=f69ce1c770e6d9d35daf7c97c343d6a81a64c122&v=4"/>'
-#      url: https://github.com/Sherlocksuper
-#    unsplash:
-#      icon: '<img src="/assets/placeholder/social/3616429.svg"/>'
-#      url: https://
-#    comments:
-#      icon: '<img src="/assets/placeholder/social/942ebbf1a4b91.svg"/>'
-#      url: https://
+  #footer:
+  #  social:
+  #    github:
+  #      icon: '<img src="https://avatars.githubusercontent.com/u/116318567?s=400&u=f69ce1c770e6d9d35daf7c97c343d6a81a64c122&v=4"/>'
+  #      url: https://github.com/Sherlocksuper
+  #    unsplash:
+  #      icon: '<img src="/assets/placeholder/social/3616429.svg"/>'
+  #      url: https://
+  #    comments:
+  #      icon: '<img src="/assets/placeholder/social/942ebbf1a4b91.svg"/>'
+  #      url: https://
 
 
 
@@ -57,3 +67,16 @@ menubar:
       icon: solar:chat-square-like-bold-duotone
       title: 社交
       url: /friends/
+
+style:
+  text-align: justify
+  smooth_scroll: false
+  codeblock:
+    scrollbar: 0px
+  font-size:
+    body: 1rem
+  font-family:
+    logo: '"LXGW WenKai Screen", system-ui, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif'
+    body: '"LXGW WenKai Screen", system-ui, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif'
+    code: '"LXGW WenKai Screen", Menlo, Monaco, Consolas, system-ui, "Courier New", monospace, sans-serif'
+    codeblock: 'Menlo, Monaco, Consolas, system-ui, "Courier New", monospace, sans-serif'

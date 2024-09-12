@@ -113,6 +113,17 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: stellar
 
+
+font:
+  enable: true
+  family: 'Noto Serif SC, serif'
+  size: 16px
+  line_height: 1.8
+  code:
+    family: 'Fira Code, monospace'
+    size: 14px
+    line_height: 1.6
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:

@@ -5,9 +5,12 @@ description: 本文将会以Flutter和React的渲染原理为主线，讲述不�
 date: ':year-:month-:day :hour:00:00'
 updated:
 top_img:
+categories: [ "妙手" ]
 tags:
   - develop
   - 妙手
+
+sticky: 999
 ---
 
 **_“彼时彼刻，恰如此时此刻”
