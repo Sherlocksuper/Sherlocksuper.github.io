@@ -8,7 +8,9 @@ subtitle: ''
 description: ''
 keywords:
 author: Sherlock
-language: zh-CN
+language:
+  - zh-CN
+  - en
 timezone: ''
 
 # URL
@@ -19,6 +21,15 @@ permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
+
+
+
+# Avatar (頭像)
+avatar:
+  img: /_img/head.jpg
+  effect: true
+
+
 
 # Directory
 source_dir: source

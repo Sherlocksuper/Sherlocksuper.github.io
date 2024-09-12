@@ -3,6 +3,7 @@ layout: posts
 title: 低配版仿网易云app
 description: 作者使用flutter在假期开发了一款简易的网易云app，实现了核心功能，包括歌曲的下载、播放、搜索、歌单广场等,并对网易云音乐接口进行了分析
 date: 2024-2-1 22:47:29
+categories: [ "作品集" ]
 tags:
   - android
   - flutter
