@@ -1,7 +1,7 @@
 ---
 title: Cursor一键导入WebStorm样式
 tags: [
-  "其他“
+  "其他"
 ]
 categories: [
   "本手"
