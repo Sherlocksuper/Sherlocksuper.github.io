@@ -48,9 +48,9 @@ type:
 
 看样式
 
-[cursor展示](15cursor-style/cursor-overview.png)
+![cursor展示](15cursor-style/cursor-overview.png)
 
-[webstorm展示](15cursor-style/webstorm-overview.png)
+![webstorm展示](15cursor-style/webstorm-overview.png)
 
 还适配了包括但不限于以下的快捷键：
 
