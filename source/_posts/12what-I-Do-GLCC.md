@@ -1,9 +1,9 @@
 ---
 title: 参与开源四个月，我干了什么？
-date: ':year-:month-:day :hour:00:00'
 updated:
 description: 本篇博客记录了我在开源项目GLCC中的工作，从五月一号开始，到目前，八月一号
 top_img:
+date: 2024-08-14 10:56:16
 tags:
   - 本手
 ---

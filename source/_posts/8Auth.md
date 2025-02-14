@@ -1,7 +1,7 @@
 ---
 title: 权限认证
 description: 本文通过引用掘金上一篇较为不明的文章，对token、cookie、session、jwt、oauth2进行了简单的梳理与辨析
-date: ':year-:month-:day :hour:00:00'
+date: 2024-07-14 10:56:16
 updated:
 top_img:
 tags:

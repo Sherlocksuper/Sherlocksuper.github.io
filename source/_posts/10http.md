@@ -1,8 +1,8 @@
 ---
 title: HTTP 驾驭网络的艺术
-date: ':year-:month-:day :hour:00:00'
 updated:
 description: 本文将会以HTTP的历史为主线，讲述不同版本之间的差异，以及不同版本的新特性。
+date: 2024-07-25 10:56:16
 top_img:
 tags:
 ---

@@ -1,9 +1,9 @@
 ---
 title: OAuth2.0与SSO：打造一个属于懒蛋的世界
-date: ':year-:month-:day :hour:00:00'
 updated:
 description: 试想一下，你是一个懒蛋，你不想记住各种各样的账号密码，你不想在各种网站上注册账号，你只想使用一个账号密码，然后就可以访问所有的网站，这个时候，OAuth2.0和SSO就是你的救星。
 top_img:
+date: 2024-08-01 10:56:16
 tags:
   - develop
   - 本手 

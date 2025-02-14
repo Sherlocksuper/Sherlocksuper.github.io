@@ -5,6 +5,7 @@ updated:
 description: 本文详细记录了前后端项目（React + Node）部署过程中遇到的各种问题和解决方案，包括NVM、Node、npm、Linux大小写敏感、用户权限、SSH进程等关键点，旨在为开发者提供参考。
 top_img:
 categories: [ "开发" ]
+date: 2024-9-14 10:56:16 
 tags:
   - 开发
   - 部署
