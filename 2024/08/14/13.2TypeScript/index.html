@@ -1,0 +1,775 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin><link rel="preconnect" href="https://unpkg.com" crossorigin><link rel="preconnect" href="https://cdn.bootcdn.net" crossorigin><link rel="preconnect" href="null" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>TypeScript Part2 - sherlock</title>
+
+  
+    <meta name="description" content="总结了TypeScript的模块、装饰器、声明、三斜线指令等内容, 对上一篇博客进行了补充">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript Part2">
+<meta property="og:url" content="http://example.com/2024/08/14/13.2TypeScript/index.html">
+<meta property="og:site_name" content="sherlock">
+<meta property="og:description" content="总结了TypeScript的模块、装饰器、声明、三斜线指令等内容, 对上一篇博客进行了补充">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/08/14/13.2TypeScript/Untitled.png">
+<meta property="og:image" content="http://example.com/2024/08/14/13.2TypeScript/Untitled1.png">
+<meta property="og:image" content="http://example.com/2024/08/14/13.2TypeScript/Untitled2.png">
+<meta property="og:image" content="http://example.com/2024/08/14/13.2TypeScript/Untitled3.png">
+<meta property="og:image" content="http://example.com/2024/08/14/13.2TypeScript/Untitled4.png">
+<meta property="og:image" content="http://example.com/2024/08/14/13.2TypeScript/Untitled5.png">
+<meta property="og:image" content="http://example.com/2024/08/14/13.2TypeScript/Untitled6.png">
+<meta property="og:image" content="http://example.com/2024/08/14/13.2TypeScript/Untitled6.png">
+<meta property="article:published_time" content="2024-08-14T02:56:16.000Z">
+<meta property="article:modified_time" content="2025-03-31T13:05:44.996Z">
+<meta property="article:author" content="Sherlock">
+<meta property="article:tag" content="本手">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/14/13.2TypeScript/Untitled.png">
+  
+  
+  
+  <meta name="keywords" content="本手">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+
+  
+
+  <link rel="stylesheet" href="/css/custom-font.css">
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/116318567?s=400&u=f69ce1c770e6d9d35daf7c97c343d6a81a64c122&v=4" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">sherlock</div><div class="sub normal cap">探索代码与创意的交汇点</div><div class="sub hover cap" style="opacity:0"> 用技术构建未来的想象</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/notes/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/explore/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2025/03/31/18mylife/"><span class="title">我最近的生活</span></a><a class="item title" href="/2025/04/20/19React19/"><span class="title">React19概览</span></a><a class="item title" href="/2024/07/14/8Auth/"><span class="title">权限认证</span></a><a class="item title" href="/2024/07/20/9flutter-react/"><span class="title">从Flutter到React,架空用户的性能宰相</span></a><a class="item title" href="/2024/06/15/7long/"><span class="title">龙芯开发板</span></a><a class="item title" href="/2024/01/13/2some/"><span class="title">鸟宿池边树</span></a><a class="item title" href="/2024/03/23/4Zing/"><span class="title">Zing 一款前后端独立gpt软件</span></a><a class="item title" href="/2024/02/01/3wyyapp/"><span class="title">低配版仿网易云app</span></a><a class="item title" href="/2025/03/31/5js_debounce/"><span class="title">简单的防抖及其迭代</span></a><a class="item title" href="/2024/06/15/6ospp/"><span class="title">记录一次开源经历--Ospp</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/TypeScript/">TypeScript</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-08-14T02:56:16.000Z">2024-08-14</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-03-31T13:05:44.996Z">2025-03-31</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>TypeScript Part2</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="TypeScript2"><a href="#TypeScript2" class="headerlink" title="TypeScript2"></a>TypeScript2</h1><h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><ol>
+<li>m模块在自身作用域执行，不是全局作用域</li>
+<li>除非使用export导出，否则定义在内部的变量都是不可见的</li>
+<li>模块使用<em><strong>模块加载器</strong></em>导入其他模块，<ol>
+<li>模块加载器用于在执行此模块代码之前去查找并执行这个模块所有的依赖</li>
+<li>JavaScript模块加载器是服务于Node.js的<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CommonJS">CommonJS</a>和服务于Web应用的<a target="_blank" rel="noopener" href="http://requirejs.org/">Require.js</a>。</li>
+</ol>
+</li>
+<li>任何包含顶级import或者export的文件都为一个模块，如果都不带，那么内容为全局可见的</li>
+</ol>
+<h2 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h2><h3 id="导出语句"><a href="#导出语句" class="headerlink" title="导出语句"></a>导出语句</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> &#123; <span class="title class_">ZipCodeValidator</span> &#125;;</span><br><span class="line"><span class="keyword">export</span> &#123; <span class="title class_">ZipCodeValidator</span> <span class="keyword">as</span> mainValidator &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用as可以重命名</p>
+<h3 id="重新导出"><a href="#重新导出" class="headerlink" title="重新导出"></a>重新导出</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">ParseIntBasedZipCodeValidator</span> &#123;</span><br><span class="line">    <span class="title function_">isAcceptable</span>(<span class="params">s: string</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> s.<span class="property">length</span> === <span class="number">5</span> &amp;&amp; <span class="built_in">parseInt</span>(s).<span class="title function_">toString</span>() === s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出原先的验证器但做了重命名</span></span><br><span class="line"><span class="keyword">export</span> &#123;<span class="title class_">ZipCodeValidator</span> <span class="keyword">as</span> <span class="title class_">RegExpBasedZipCodeValidator</span>&#125; <span class="keyword">from</span> <span class="string">&quot;./ZipCodeValidator&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>不会在当前模块导入或者定义一个新的局部变量</li>
+</ol>
+<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">ZipCodeValidator</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./ZipCodeValidator&quot;</span>; <span class="comment">//普通导入</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">ZipCodeValidator</span> <span class="keyword">as</span> <span class="variable constant_">ZCV</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./ZipCodeValidator&quot;</span>; <span class="comment">//重命名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> validator <span class="keyword">from</span> <span class="string">&quot;./ZipCodeValidator&quot;</span>; <span class="comment">//导入全部，用validator代表这个模块</span></span><br><span class="line"><span class="keyword">let</span> myValidator = <span class="keyword">new</span> validator.<span class="title class_">ZipCodeValidator</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="默认导出"><a href="#默认导出" class="headerlink" title="默认导出"></a>默认导出</h2><ol>
+<li><p>类和函数声明可以直接被标记为默认导出。 标记为默认导出的类和函数的名字是可以省略的。</p>
+ <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numberRegexp = <span class="regexp">/^[0-9]+$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> (<span class="params">s: string</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> s.<span class="property">length</span> === <span class="number">5</span> &amp;&amp; numberRegexp.<span class="title function_">test</span>(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>default的导出可以是一个值</p>
+</li>
+</ol>
+<h2 id="export-和-import-require"><a href="#export-和-import-require" class="headerlink" title="export = 和 import = require()"></a><strong><code>export =</code> 和 <code>import = require()</code></strong></h2><ol>
+<li>在CommonJS和AMD的环境里有一个exports变量，包含着一个模块的所有导出内容</li>
+<li>exports可以被赋值为一个对象，类似于es6的默认导出</li>
+<li>为了兼容CommonJS和AMD提供了export &#x3D; 语法</li>
+<li>若使用<code>export =</code>导出一个模块，则必须使用TypeScript的特定语法<code>import module = require(&quot;module&quot;)</code>来导入此模块。</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test.ts</span></span><br><span class="line"><span class="keyword">export</span> = &#123;</span><br><span class="line">    <span class="attr">hello</span>: <span class="string">&#x27;world&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">///导入</span></span><br><span class="line"><span class="keyword">import</span> zip = <span class="built_in">require</span>(<span class="string">&quot;./test.ts&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="命名空间-nameSpace"><a href="#命名空间-nameSpace" class="headerlink" title="命名空间 nameSpace"></a>命名空间 nameSpace</h1><p>“内部模块”</p>
+<ol>
+<li>提取逻辑，记录的同时不担心与其他对象产生命名冲突</li>
+<li>相同namespace即使在不同文件也是同一个明明空间，与接口的<strong>合并</strong>同工</li>
+<li>简化命名空间操作: <strong>import q &#x3D; x.y.z</strong> （用q代表x.y.z，起个名字）</li>
+</ol>
+<h1 id="模块和命名空间的区别"><a href="#模块和命名空间的区别" class="headerlink" title="模块和命名空间的区别"></a>模块和命名空间的区别</h1><ol>
+<li><p>模块有自己的作用域，只有被导出才能被其他文件引用。namespace可以在全局引用，即使不导出</p>
+ <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// global.ts</span></span><br><span class="line">namespace <span class="title class_">MyNamespace</span> &#123;</span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line">        <span class="title function_">constructor</span>(<span class="params">public name: string</span>) &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main.ts</span></span><br><span class="line"><span class="keyword">let</span> instance = <span class="keyword">new</span> <span class="title class_">MyNamespace</span>.<span class="title class_">MyClass</span>(<span class="string">&#x27;example&#x27;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>模块是文件级别的，用import和export进行管理，namespace在全局通过代码自行组织</p>
+</li>
+<li><p>使用场景：模块是 TypeScript 和 ES6 中推荐的组织代码的方式，适用于大型项目。而命名空间主要用于组织全局变量，适用于较小的项目或者为了向后兼容</p>
+</li>
+</ol>
+<p><em><del>ps:可以把模块比作每个城池，命名空间比作教会</del></em></p>
+<h1 id="模块解析"><a href="#模块解析" class="headerlink" title="模块解析"></a>模块解析</h1><h3 id="相对导入"><a href="#相对导入" class="headerlink" title="相对导入"></a>相对导入</h3><ol>
+<li>以 &#x2F;   .&#x2F;   ..&#x2F; 开头的</li>
+<li>相对于导入他的文件</li>
+</ol>
+<h3 id="非相对"><a href="#非相对" class="headerlink" title="非相对"></a>非相对</h3><ol>
+<li>所有其它形式的导入</li>
+<li>相对于baseUrl或者<strong>路径映射</strong></li>
+</ol>
+<h2 id="模块解析策略"><a href="#模块解析策略" class="headerlink" title="模块解析策略"></a>模块解析策略</h2><h3 id="Classic"><a href="#Classic" class="headerlink" title="Classic"></a>Classic</h3><ol>
+<li><p>之前的默认解析策略，为了向后兼容而保留</p>
+</li>
+<li><p>相对导入模块相对于导入他的文件解析</p>
+ <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/root/src/folder/A.<span class="property">ts</span></span><br><span class="line"></span><br><span class="line">/root/src/folder/moduleB.<span class="property">ts</span></span><br><span class="line">/root/src/folder/moduleB.<span class="property">d</span>.<span class="property">ts</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>非相对模块的导入，编译器会从包含文件的目录依次向上级目录遍历</p>
+ <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//有一个对moduleB的非相对导入</span></span><br><span class="line"><span class="keyword">import</span> &#123; b &#125; <span class="keyword">from</span> <span class="string">&quot;moduleB&quot;</span></span><br><span class="line"><span class="comment">//它是在/root/src/folder/A.ts文件里，会以如下的方式来定位&quot;moduleB&quot;：</span></span><br><span class="line"></span><br><span class="line">/root/src/folder/moduleB.<span class="property">ts</span></span><br><span class="line">/root/src/folder/moduleB.<span class="property">d</span>.<span class="property">ts</span></span><br><span class="line">/root/src/moduleB.<span class="property">ts</span></span><br><span class="line">/root/src/moduleB.<span class="property">d</span>.<span class="property">ts</span></span><br><span class="line">/root/moduleB.<span class="property">ts</span></span><br><span class="line">/root/moduleB.<span class="property">d</span>.<span class="property">ts</span></span><br><span class="line">/moduleB.<span class="property">ts</span></span><br><span class="line">/moduleB.<span class="property">d</span>.<span class="property">ts</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h3><p>相对路径：</p>
+<ol>
+<li><p>相对路径文件是否存在</p>
+</li>
+<li><p>如果不存在文件，检查是否有目录，如果有目录，检查是否【有package.json文件并且这个文件制定了一个main路径】，如果发现了package.json中有main路径，则会引用 检查目录的路径拼接main路径</p>
+ <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/root/src/moduleB/package.<span class="property">json</span></span><br><span class="line">包含了&#123; <span class="string">&quot;main&quot;</span>: <span class="string">&quot;lib/mainModule.js&quot;</span> &#125;，</span><br><span class="line">那么<span class="title class_">Node</span>.<span class="property">js</span>会引用/root/src/moduleB/lib/mainModule.<span class="property">js</span>。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查<code>/root/src/moduleB</code>目录是否包含一个<code>index.js</code>文件。 这个文件会被隐式地当作那个文件夹下的”main”模块。</p>
+</li>
+</ol>
+<p>非相对路径:</p>
+<ol>
+<li>会在node_modules里面查找</li>
+<li>假设require(”moduleB”)</li>
+<li>首先会查找 &#x2F;node_modules&#x2F;moduleB.js</li>
+<li>&#x2F;node_modules&#x2F;moduleB&#x2F;package.json(如果指定了main属性)</li>
+<li>&#x2F;node_module&#x2F;moduleB&#x2F;index.js</li>
+<li>之后向上跳目录</li>
+</ol>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/08/14/13.2TypeScript/Untitled.png" alt="Untitled"></p>
+<h2 id="附加的模块解析标记"><a href="#附加的模块解析标记" class="headerlink" title="附加的模块解析标记"></a>附加的模块解析标记</h2><p>由于工程源码和输出结构不同，需要经过转换。</p>
+<p>包括把ts编译为js，将不同位置的依赖拷贝至一个输出位置。</p>
+<p> 最终结果就是：</p>
+<p>运行时的模块名与包含它们声明的源文件里的模块名不同。 或者最终输出文件里的模块路径与编译时的源文件路径不同了。</p>
+<h3 id="Base-URL"><a href="#Base-URL" class="headerlink" title="Base URL"></a>Base URL</h3><p>设置<code>baseUrl</code>来告诉编译器到哪里去查找模块。 所有非相对模块导入都会被当做相对于<code>baseUrl</code>。</p>
+<p><em>baseUrl</em>的值由以下两者之一决定：</p>
+<ul>
+<li>命令行中<em>baseUrl</em>的值（如果给定的路径是相对的，那么将相对于当前路径进行计算）</li>
+<li>‘tsconfig.json’里的<em>baseUrl</em>属性（如果给定的路径是相对的，那么将相对于‘tsconfig.json’路径进行计算）</li>
+</ul>
+<p>注意相对模块的导入不会被设置的<code>baseUrl</code>所影响，因为它们总是相对于导入它们的文件</p>
+<h3 id="路径映射"><a href="#路径映射" class="headerlink" title="路径映射"></a>路径映射</h3><p>TypeScript编译器通过使用<code>tsconfig.json</code>文件里的<code>&quot;paths&quot;</code>来支持的声明映射。 下面是一个如何指定<code>jquery</code>的<code>&quot;paths&quot;</code>的例子。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;compilerOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;baseUrl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;.&quot;</span><span class="punctuation">,</span> <span class="comment">// This must be specified if &quot;paths&quot; is.</span></span><br><span class="line">    <span class="attr">&quot;paths&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;jquery&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;node_modules/jquery/dist/jquery&quot;</span><span class="punctuation">]</span> <span class="comment">// 此处映射是相对于&quot;baseUrl&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>path是相对于baseUrl的</p>
+<p>(如果是非相对名，则直接拼接，如果是相对名，则进行对应的改变)</p>
+<h1 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h1><p>装饰器是实验特性</p>
+<p>启用:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;target&quot;</span>: <span class="string">&quot;ES5&quot;</span>,</span><br><span class="line">        <span class="string">&quot;experimentalDecorators&quot;</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义：它能够被附加到<a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/handbook/decorators.html#class-decorators">类声明</a>，<a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/handbook/decorators.html#method-decorators">方法</a>，<a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/handbook/decorators.html#accessor-decorators">访问符</a>，<a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/handbook/decorators.html#property-decorators">属性</a>或<a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/handbook/decorators.html#parameter-decorators">参数</a>上。 装饰器使用 <code>@expression</code>这种形式，<code>expression</code>求值后必须为一个函数，它会在运行时被调用，被装饰的声明信息做为参数传入。</p>
+<h3 id="装饰器工厂"><a href="#装饰器工厂" class="headerlink" title="装饰器工厂"></a>装饰器工厂</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/08/14/13.2TypeScript/Untitled1.png" alt="Untitled"></p>
+<h3 id="类装饰器"><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/08/14/13.2TypeScript/Untitled2.png" alt="Untitled"></p>
+<ol>
+<li>target此处指Person</li>
+</ol>
+<h3 id="属性装饰器"><a href="#属性装饰器" class="headerlink" title="属性装饰器"></a>属性装饰器</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/08/14/13.2TypeScript/Untitled3.png" alt="Untitled"></p>
+<ol>
+<li>target为Person类</li>
+<li>attr 为 ”name“</li>
+</ol>
+<h3 id="方法装饰器"><a href="#方法装饰器" class="headerlink" title="方法装饰器"></a>方法装饰器</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/08/14/13.2TypeScript/Untitled4.png" alt="Untitled"></p>
+<ol>
+<li>target为Person类</li>
+<li>propertyKey为方法的属性键值</li>
+<li>descriptor为属性描述</li>
+</ol>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/08/14/13.2TypeScript/Untitled5.png" alt="Untitled"></p>
+<h3 id="装饰器组合"><a href="#装饰器组合" class="headerlink" title="装饰器组合"></a>装饰器组合</h3><p>多个装饰器应用在一个生命上时</p>
+<ol>
+<li>由上到下对装饰器表达式求知（即获取返回的函数部分）</li>
+<li>由下到上把函数结果进行调用</li>
+</ol>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;f(): evaluated&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">target, propertyKey: <span class="built_in">string</span>, descriptor: PropertyDescriptor</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;f(): called&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">g</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;g(): evaluated&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">target, propertyKey: <span class="built_in">string</span>, descriptor: PropertyDescriptor</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;g(): called&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    <span class="meta">@f</span>()</span><br><span class="line">    <span class="meta">@g</span>()</span><br><span class="line">    <span class="title function_">method</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在控制台里会打印出如下结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f(): evaluated</span><br><span class="line">g(): evaluated</span><br><span class="line">g(): called</span><br><span class="line">f(): called</span><br></pre></td></tr></table></figure>
+
+<h3 id="装饰器求值"><a href="#装饰器求值" class="headerlink" title="装饰器求值"></a>装饰器求值</h3><p>原则：由内到外，由小到大</p>
+<p>类中不同声明上的装饰器将按以下规定的顺序应用：</p>
+<ol>
+<li><em>参数装饰器</em>，然后依次是<em>方法装饰器</em>，<em>访问符装饰器</em>，或<em>属性装饰器</em>应用到每个实例成员。</li>
+<li><em>参数装饰器</em>，然后依次是<em>方法装饰器</em>，<em>访问符装饰器</em>，或<em>属性装饰器</em>应用到每个静态成员。</li>
+<li><em>参数装饰器</em>应用到构造函数。</li>
+<li><em>类装饰器</em>应用到类。</li>
+</ol>
+<h1 id="Declare"><a href="#Declare" class="headerlink" title="Declare"></a>Declare</h1><p>告诉编译器这个变量是存在的</p>
+<p>应用于一些不使用ts的库，但是需要引用到ts里面，需要有一个类型，就可以用declare来声明一下</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.js</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">showMessage</span>(<span class="params">message</span>)&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(message)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//test.ts</span></span><br><span class="line"><span class="title function_">showMessage</span>(<span class="string">&quot;name&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//common.d.ts</span></span><br><span class="line"><span class="comment">//如果删去则报错</span></span><br><span class="line">declare <span class="title function_">showMessage</span>(<span class="attr">message</span>:string):<span class="keyword">void</span></span><br></pre></td></tr></table></figure>
+
+<p>引入类型描述的时候会自动引入对应的js的文件</p>
+<h3 id="同名引入"><a href="#同名引入" class="headerlink" title="同名引入"></a>同名引入</h3><ul>
+<li>对于自己写的模块，会默认引用与该文件同名的类型声明文件。比如有一个foo.js和foo.d.ts，如果使用import会自动由foo.d.ts提供</li>
+</ul>
+<h3 id="自动引用"><a href="#自动引用" class="headerlink" title="自动引用"></a>自动引用</h3><ul>
+<li><p>第三方库都有@types&#x2F;xxx ，declare文件</p>
+<p>  <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/08/14/13.2TypeScript/Untitled6.png" alt="Untitled"></p>
+<p>  配置这个，type在的目录</p>
+</li>
+</ul>
+<h2 id="declare-module、namespace"><a href="#declare-module、namespace" class="headerlink" title="declare module、namespace"></a>declare module、namespace</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">declare <span class="variable language_">module</span> <span class="string">&quot;jquery&quot;</span> &#123;</span><br><span class="line">	<span class="keyword">export</span> <span class="keyword">let</span> <span class="attr">fn</span>:string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jquery.<span class="property">fn</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="为外部属性新增"><a href="#为外部属性新增" class="headerlink" title="为外部属性新增"></a>为外部属性新增</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.ts</span></span><br><span class="line"><span class="keyword">export</span> interface A &#123;</span><br><span class="line">	<span class="attr">value1</span>:string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//test.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123;A&#125; <span class="keyword">from</span> <span class="string">&quot;index.ts&quot;</span></span><br><span class="line">declare <span class="variable language_">module</span> <span class="string">&quot;index.ts&quot;</span> &#123;</span><br><span class="line">	interface A &#123;</span><br><span class="line">		<span class="attr">value2</span>:string</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//接口合并</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="三斜线指令"><a href="#三斜线指令" class="headerlink" title="三斜线指令"></a>三斜线指令</h1><p>包含单个XML标签的单行注释，注释的内容会作为编译器指令使用</p>
+<p>只能仿造包含他的<em><strong>文件的最顶端</strong></em></p>
+<p>其前面只能出现单行或者多行注释</p>
+<p>如果前面有语句或声明，那么会被当做普通的单行注释</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference path=&quot;...&quot; /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>专门用来引用.d.ts文件</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference types=&quot;...&quot; /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>解析所有三斜线引用的指令，把对应的文件添加到编译的过程中</p>
+<p>路径是相对于包含他的文件的</p>
+<h3 id="如果引用的的文件不存在会报错"><a href="#如果引用的的文件不存在会报错" class="headerlink" title="如果引用的的文件不存在会报错"></a>如果引用的的文件不存在会报错</h3><h3 id="—noResolve"><a href="#—noResolve" class="headerlink" title="—noResolve"></a>—noResolve</h3><p>如果使用了<strong>noResolve</strong>，三斜线会被忽略</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference path=&quot;...&quot; /&gt; 声明对文件的依赖</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// &lt;reference types=&quot;node&quot; /&gt; 声明对包的依赖</span></span><br><span class="line"><span class="comment">//表明使用了@types/node/index.d.ts里面生命的名字</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在编译阶段生成的声明文件，编译器会自动添加  <strong>&#x2F;&#x2F;&#x2F; <reference types="node" /></strong></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/08/14/13.2TypeScript/Untitled6.png" alt="Untitled"></p>
+<p>配置这个，type在的目录</p>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/08/14/13-3TypeScript/">TypeScript All</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/08/14/13.1TypeScript/">TypeScript Part1</a></div></section></div>
+
+<div class="related-wrap" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2024/08/14/12lexical-env/" title="javascript-词法环境"><span class="title">javascript-词法环境</span></a><a class="item" href="/2024/08/01/11oauth2-sso/" title="OAuth2.0与SSO：打造一个属于懒蛋的世界"><span class="title">OAuth2.0与SSO：打造一个属于懒蛋的世界</span><span class="excerpt">试想一下，你是一个懒蛋，你不想记住各种各样的账号密码，你不想在各种网站上注册账号，你只想使用一个账号密码，然后就可以访问所有的网站，这个时候，OAuth2.0和SSO就是你的救星。</span></a><a class="item" href="/2024/08/14/12what-I-Do-GLCC/" title="参与开源四个月，我干了什么？"><span class="title">参与开源四个月，我干了什么？</span><span class="excerpt">本篇博客记录了我在开源项目GLCC中的工作，从五月一号开始，到目前，八月一号</span></a><a class="item" href="/2024/08/14/13-3TypeScript/" title="TypeScript All"><span class="title">TypeScript All</span><span class="excerpt">对于前两部分typescript较为精华的部分的总结</span></a><a class="item" href="/2024/08/14/13.1TypeScript/" title="TypeScript Part1"><span class="title">TypeScript Part1</span><span class="excerpt">本篇博客记录了TypeScript的一些基础知识，包括类型、接口、类、泛型等， 旨在帮助新手更好的学习TypeScript</span></a></div></section></div>
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">Sherlock</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1">Stellar 1.29.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TypeScript2"><span class="toc-text">TypeScript2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97"><span class="toc-text">模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA"><span class="toc-text">导出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E8%AF%AD%E5%8F%A5"><span class="toc-text">导出语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E5%AF%BC%E5%87%BA"><span class="toc-text">重新导出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5"><span class="toc-text">导入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%AF%BC%E5%87%BA"><span class="toc-text">默认导出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#export-%E5%92%8C-import-require"><span class="toc-text">export &#x3D; 和 import &#x3D; require()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4-nameSpace"><span class="toc-text">命名空间 nameSpace</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%92%8C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">模块和命名空间的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E8%A7%A3%E6%9E%90"><span class="toc-text">模块解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%AF%B9%E5%AF%BC%E5%85%A5"><span class="toc-text">相对导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E7%9B%B8%E5%AF%B9"><span class="toc-text">非相对</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E8%A7%A3%E6%9E%90%E7%AD%96%E7%95%A5"><span class="toc-text">模块解析策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Classic"><span class="toc-text">Classic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node"><span class="toc-text">Node</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%84%E5%8A%A0%E7%9A%84%E6%A8%A1%E5%9D%97%E8%A7%A3%E6%9E%90%E6%A0%87%E8%AE%B0"><span class="toc-text">附加的模块解析标记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Base-URL"><span class="toc-text">Base URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E6%98%A0%E5%B0%84"><span class="toc-text">路径映射</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-text">装饰器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E5%B7%A5%E5%8E%82"><span class="toc-text">装饰器工厂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-text">类装饰器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-text">属性装饰器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-text">方法装饰器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E7%BB%84%E5%90%88"><span class="toc-text">装饰器组合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8%E6%B1%82%E5%80%BC"><span class="toc-text">装饰器求值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Declare"><span class="toc-text">Declare</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E5%90%8D%E5%BC%95%E5%85%A5"><span class="toc-text">同名引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%BC%95%E7%94%A8"><span class="toc-text">自动引用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#declare-module%E3%80%81namespace"><span class="toc-text">declare module、namespace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E5%A4%96%E9%83%A8%E5%B1%9E%E6%80%A7%E6%96%B0%E5%A2%9E"><span class="toc-text">为外部属性新增</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E6%96%9C%E7%BA%BF%E6%8C%87%E4%BB%A4"><span class="toc-text">三斜线指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">预处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E5%BC%95%E7%94%A8%E7%9A%84%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8D%E5%AD%98%E5%9C%A8%E4%BC%9A%E6%8A%A5%E9%94%99"><span class="toc-text">如果引用的的文件不存在会报错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%94noResolve"><span class="toc-text">—noResolve</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

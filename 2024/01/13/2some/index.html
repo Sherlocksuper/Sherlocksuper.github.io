@@ -1,0 +1,623 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin><link rel="preconnect" href="https://unpkg.com" crossorigin><link rel="preconnect" href="https://cdn.bootcdn.net" crossorigin><link rel="preconnect" href="null" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>鸟宿池边树 - sherlock</title>
+
+  
+    <meta name="description" content="一些关于flutter以及android的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鸟宿池边树">
+<meta property="og:url" content="http://example.com/2024/01/13/2some/index.html">
+<meta property="og:site_name" content="sherlock">
+<meta property="og:description" content="一些关于flutter以及android的问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-13T02:47:29.000Z">
+<meta property="article:modified_time" content="2025-03-31T13:05:45.005Z">
+<meta property="article:author" content="Sherlock">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="flutter">
+<meta property="article:tag" content="俗手">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="android,flutter,俗手">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+
+  
+
+  <link rel="stylesheet" href="/css/custom-font.css">
+</head>
+<body>
+
+<div class="l_body s:aa index tech" id="start" layout="posts" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/116318567?s=400&u=f69ce1c770e6d9d35daf7c97c343d6a81a64c122&v=4" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">sherlock</div><div class="sub normal cap">探索代码与创意的交汇点</div><div class="sub hover cap" style="opacity:0"> 用技术构建未来的想象</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/notes/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/explore/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets"></div>
+
+</div></aside><div class="l_main" id="main">
+
+<header class="header mobile-only"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/116318567?s=400&u=f69ce1c770e6d9d35daf7c97c343d6a81a64c122&v=4" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">sherlock</div><div class="sub normal cap">探索代码与创意的交汇点</div><div class="sub hover cap" style="opacity:0"> 用技术构建未来的想象</div></a></div></header>
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+
+  <span class="sep"></span>
+  <a class="cap breadcrumb" href="/2024/01/13/2some/">鸟宿池边树</a>
+  </div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-01-13T02:47:29.000Z">2024-01-13</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-03-31T13:05:45.005Z">2025-03-31</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>鸟宿池边树</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><p>总的来说，我不是一个爱写文章的人。记起来从写人生第一篇作文开始，我的写作之路就没有遇到过坦途。曾经试着反思原因，大抵是因为一些完美主义倾向。譬如写了上一句，要对下一句的方向内容乃至把字句被字句都要犹豫很久。不过这也是可贵的，古代诗人曾经有过诗句。鸟宿池边树，僧敲月下门。为人性僻耽佳句，语不惊人死不休。想来那些欧阳修、柳宗元之类的大家都曾如此。</p>
+<p>就譬如写上一段以及这一段，大抵改了二十次有余。</p>
+<p>最近还是在做我名为 ”电梯维保“ 的项目，不过近几日工作少了些枯燥。添加了些百度api定位之类的，由此引出来了种种。</p>
+<p>以下是这几日我遇到的一些问题，权当是总结，也是为了以后找起来方便。</p>
+<h2 id="1-sourcetree-配置-github-SSH"><a href="#1-sourcetree-配置-github-SSH" class="headerlink" title="1. sourcetree 配置 github  SSH"></a>1. sourcetree 配置 github  SSH</h2><p>原因：在像往常一样用ssh拉取git仓库的时候报了 port：22   timeout错误，故此总结了两篇比较简洁的技术博客</p>
+<p>配置ssh ：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7224017330724175927">https://juejin.cn/post/7224017330724175927</a></p>
+<p>修改config（如果没有config则新建）：<a target="_blank" rel="noopener" href="https://blog.csdn.net/the__future/article/details/130038818">https://blog.csdn.net/the__future/article/details/130038818</a></p>
+<h2 id="2-百度api"><a href="#2-百度api" class="headerlink" title="2.百度api"></a>2.百度api</h2><h3 id="1-百度api-location定位功能-封装代码"><a href="#1-百度api-location定位功能-封装代码" class="headerlink" title="1.百度api  location定位功能   封装代码"></a>1.百度api  location定位功能   封装代码</h3><p>以下是代码：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GetLocation</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">int</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">bool</span> starLocate = <span class="keyword">false</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">double</span> latitude = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">double</span> longitude = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  GetLocation();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> LocationFlutterPlugin myLocPlugin = LocationFlutterPlugin();</span><br><span class="line">  <span class="keyword">static</span> BaiduLocation baiduLocation = BaiduLocation();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> Future&lt;<span class="built_in">bool</span>&gt; locationInit() <span class="keyword">async</span> &#123;</span><br><span class="line">    log(<span class="string">&quot;定位初始化&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// <span class="language-markdown">动态申请定位权限</span></span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">await</span> requestPermission()) &#123;</span><br><span class="line">      myLocPlugin.setAgreePrivacy(<span class="keyword">true</span>);</span><br><span class="line">      myLocPlugin.getApiKeyCallback(callback: (<span class="built_in">String</span> result) &#123;</span><br><span class="line">        <span class="built_in">String</span> str = result;</span><br><span class="line">        log(<span class="string">&#x27;鉴权结果：&#x27;</span> + str);</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      myLocPlugin.seriesLocationCallback(</span><br><span class="line">          callback: (BaiduLocation result) <span class="keyword">async</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (count &gt;= <span class="number">10</span>) &#123;</span><br><span class="line">          <span class="keyword">await</span> myLocPlugin.stopLocation();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (result.latitude != <span class="keyword">null</span> &amp;&amp; result.longitude != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">await</span> myLocPlugin.stopLocation();</span><br><span class="line">            longitude = result.longitude!;</span><br><span class="line">            latitude = result.latitude!;</span><br><span class="line">          &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            log(<span class="string">&quot;错误码:<span class="subst">$&#123;result.errorCode&#125;</span>  <span class="subst">$&#123;result.errorInfo&#125;</span> <span class="subst">$&#123;result.getMap().toString()&#125;</span>&quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="built_in">Map</span> androidMap = initAndroidOptions().getMap();</span><br><span class="line">      <span class="built_in">Map</span> iosMap = initIOSOptions().getMap();</span><br><span class="line">      <span class="keyword">var</span> _suc = <span class="keyword">await</span> myLocPlugin.prepareLoc(androidMap, iosMap);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> BaiduLocationAndroidOption initAndroidOptions() &#123;</span><br><span class="line">    BaiduLocationAndroidOption options = BaiduLocationAndroidOption(</span><br><span class="line">        locationMode: BMFLocationMode.hightAccuracy,</span><br><span class="line">        isNeedAddress: <span class="keyword">false</span>,</span><br><span class="line">        isNeedAltitude: <span class="keyword">false</span>,</span><br><span class="line">        isNeedLocationPoiList: <span class="keyword">false</span>,</span><br><span class="line">        isNeedNewVersionRgc: <span class="keyword">true</span>,</span><br><span class="line">        isNeedLocationDescribe: <span class="keyword">true</span>,</span><br><span class="line">        openGps: <span class="keyword">true</span>,</span><br><span class="line">        locationPurpose: BMFLocationPurpose.sport,</span><br><span class="line">        coordType: BMFLocationCoordType.bd09ll,</span><br><span class="line">        scanspan: <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> options;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> BaiduLocationIOSOption initIOSOptions() &#123;</span><br><span class="line">    BaiduLocationIOSOption options = BaiduLocationIOSOption(</span><br><span class="line">      coordType: BMFLocationCoordType.bd09ll,</span><br><span class="line">      locationTimeout: <span class="number">10</span>,</span><br><span class="line">      reGeocodeTimeout: <span class="number">10</span>,</span><br><span class="line">      activityType: BMFActivityType.automotiveNavigation,</span><br><span class="line">      desiredAccuracy: BMFDesiredAccuracy.best,</span><br><span class="line">      isNeedNewVersionRgc: <span class="keyword">true</span>,</span><br><span class="line">      pausesLocationUpdatesAutomatically: <span class="keyword">false</span>,</span><br><span class="line">      allowsBackgroundLocationUpdates: <span class="keyword">true</span>,</span><br><span class="line">      distanceFilter: <span class="number">10</span>,</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> options;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> Future&lt;<span class="built_in">Map</span>&gt; getLocationSingle() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> myLocPlugin.stopLocation();</span><br><span class="line">    longitude = <span class="number">0</span>;</span><br><span class="line">    latitude = <span class="number">0</span>;</span><br><span class="line">    starLocate = <span class="keyword">false</span>;</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">Map</span> result = &#123;<span class="string">&quot;success&quot;</span>: <span class="keyword">false</span>&#125;;</span><br><span class="line">    log(<span class="string">&quot;进入&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span> (count &lt; <span class="number">10</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!starLocate) &#123;</span><br><span class="line">        starLocate = <span class="keyword">true</span>;</span><br><span class="line">        <span class="built_in">bool</span> test=<span class="keyword">await</span> myLocPlugin.startLocation();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">await</span> Future.delayed(<span class="keyword">const</span> <span class="built_in">Duration</span>(seconds: <span class="number">1</span>))</span><br><span class="line">          .then((_) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">if</span> (longitude != <span class="number">0</span> || latitude != <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="built_in">double</span> tlong = longitude;</span><br><span class="line">          <span class="built_in">double</span> tl = latitude;</span><br><span class="line">          result = &#123;<span class="string">&quot;success&quot;</span>: <span class="keyword">true</span>, <span class="string">&quot;longitude&quot;</span>: tlong, <span class="string">&quot;latitude&quot;</span>: tl&#125;;</span><br><span class="line">          starLocate=<span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">if</span> (!starLocate) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    longitude = <span class="number">0</span>;</span><br><span class="line">    latitude = <span class="number">0</span>;</span><br><span class="line">    starLocate = <span class="keyword">false</span>;</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">    starLocate = <span class="keyword">false</span>;</span><br><span class="line">    myLocPlugin.stopLocation();</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> Future&lt;<span class="built_in">bool</span>&gt; requestPermission() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!(<span class="keyword">await</span> Permission.location.isLimited ||</span><br><span class="line">        <span class="keyword">await</span> Permission.location.isRestricted ||</span><br><span class="line">        <span class="keyword">await</span> Permission.location.isGranted)) &#123;</span><br><span class="line">      <span class="keyword">await</span> Permission.location.request();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((<span class="keyword">await</span> Permission.location.isLimited ||</span><br><span class="line">        <span class="keyword">await</span> Permission.location.isRestricted ||</span><br><span class="line">        <span class="keyword">await</span> Permission.location.isGranted)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      Get.defaultDialog(title: <span class="string">&quot;错误&quot;</span>,content: <span class="keyword">const</span> Text(<span class="string">&quot;无法获取位置信息，请手动设置权限后重启app&quot;</span>));</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段直接引用了另外一个同学的代码，我自己用 get 插件的GetxController 成功封装过一次，不过现在想想封装逻辑较之不是很清晰。</p>
+<h3 id="2-由此引申的so文件"><a href="#2-由此引申的so文件" class="headerlink" title="2.由此引申的so文件"></a>2.由此引申的so文件</h3><p>在实现了上述的location的封装以及应用之后，想要自己做一个类似于百度地图app，故而尝试调用了百度地图api。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">BMFMapOptions mapOptions = BMFMapOptions(</span><br><span class="line">        center: BMFCoordinate(39.917215, 116.380341),</span><br><span class="line">        zoomLevel: 12,</span><br><span class="line">        mapPadding: BMFEdgeInsets(left: 30, top: 0, right: 30, bottom: 0));</span><br><span class="line">Container(</span><br><span class="line">      height: screenSize.height,</span><br><span class="line">      width: screenSize.width,</span><br><span class="line">      child: BMFMapWidget(</span><br><span class="line">        onBMFMapCreated: (controller) &#123;</span><br><span class="line">          onBMFMapCreated(controller);</span><br><span class="line">        &#125;,</span><br><span class="line">        mapOptions: mapOptions,</span><br><span class="line">      ),</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+
+<p>成功按照文档配置好环境以后，出现了地图黑屏的问题（此时并没有退出）。然而在网上一些社区csdn 掘金 stackoverflow，并没有找到解决方案。观察控制台的报错，发现是 缺少了 libgnustl_shared.zip文件。 找了好久找到了下载地址：<a target="_blank" rel="noopener" href="https://ava3.androidfilehost.com/dl/JjPZ-RTGo8BAooDv19LIJQ/1705286685/24588232905720518/libgnustl_shared.zip">https://ava3.androidfilehost.com/dl/JjPZ-RTGo8BAooDv19LIJQ/1705286685/24588232905720518/libgnustl_shared.zip</a>?  然而按照网络上的方法配置到项目里后，没有用，故放弃。</p>
+<p>以下是so文件的简述以及作用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;.so&quot; 文件是一种共享库（Shared Object Library）文件的后缀名。这种文件格式通常在类Unix操作系统（如Linux）中使用。共享库包含一组预编译的可执行代码和数据，可以被多个程序共享，以提供共享的功能和资源。</span><br><span class="line"></span><br><span class="line">这些文件通常包含编译后的二进制代码，可以被动态链接到程序中，而不是静态地嵌入在每个程序中。这样做有助于减小程序文件的大小，同时允许多个程序共享相同的代码库，提高系统的效率。</span><br><span class="line"></span><br><span class="line">在Linux系统中，共享库文件通常存储在 &quot;/lib&quot; 或 &quot;/usr/lib&quot; 目录下，而应用程序通过动态链接器在运行时加载这些库。这种动态链接的方式有助于减少内存占用，同时简化程序的维护和更新。</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3-网易云api"><a href="#3-网易云api" class="headerlink" title="3.网易云api"></a>3.网易云api</h2><p>对接百度api失败之后有点烦，于是…</p>
+<p>涉及到的知识点：docker  、serveless 、nodejs跨域</p>
+<p>感谢开源项目：</p>
+<p>​		1.github地址：<a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#111;&#x6d;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#111;&#x6d;</a>:Binaryify&#x2F;NeteaseCloudMusicApi.git</p>
+<p>​		2.官方网站 :<a target="_blank" rel="noopener" href="https://docs.neteasecloudmusicapi.binaryify.com/">https://docs.neteasecloudmusicapi.binaryify.com/</a></p>
+<p>算是一个总结，也算是一个分享：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.克隆仓库并运行项目</span><br><span class="line">git clone git@github.com:Binaryify/NeteaseCloudMusicApi.git</span><br><span class="line">cd NeteaseCloudMusicApi</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">node app.js</span><br><span class="line">//之后可以在默认3000端口访问到</span><br><span class="line"></span><br><span class="line">set PORT=4000 &amp;&amp; node app.js</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-docker-部署"><a href="#1-docker-部署" class="headerlink" title="1.docker 部署"></a>1.docker 部署</h3><p>docker 是在我大一下学期接触到的，当时一并学了vim，堪称利器。然而docker对当时的我相当于降维打击，很多概念都无法理解。现在则一学就会，验证了认识的螺旋上升性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/Binaryify/NeteaseCloudMusicApi &amp;&amp; cd NeteaseCloudMusicApi</span><br><span class="line"></span><br><span class="line">$ sudo docker build . -t netease-music-api</span><br><span class="line"></span><br><span class="line">$ sudo docker run -d -p 3000:3000 netease-music-api</span><br></pre></td></tr></table></figure>
+
+<p>可视化版本的，在docker应用里的”dev enviroments“里添加任务夹即可</p>
+<p>不过部署之后在客户端请求会遇到跨域问题，这点我们之后再说</p>
+<h3 id="2-跨域问题"><a href="#2-跨域问题" class="headerlink" title="2. 跨域问题"></a>2. 跨域问题</h3><p>因为本人是打算做一个flutter的android项目的，所以会遇到跨域问题</p>
+<p>以下是我在掘金上搜索到的node js解决代码， 不过我在本地运行之后并没有解决跨域，权且当一个记录，量变引起质变，或许早晚会用到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&#x27;http&#x27;);</span><br><span class="line"></span><br><span class="line">// 第一步：接受客户端请求</span><br><span class="line">const server = http.createServer((request, response) =&gt; &#123;</span><br><span class="line">	</span><br><span class="line">    // 代理服务器，直接和浏览器直接交互，也需要设置：CORS 的首部字段</span><br><span class="line">    response.writeHead(200, &#123;</span><br><span class="line">        &#x27;Access-Control-Allow-Origin&#x27;: &#x27;*&#x27;,  // 设置 optins 方法允许所有服务器访问 </span><br><span class="line">        &#x27;Access-Control-Allow-Methods&#x27;: &#x27;*&#x27;,</span><br><span class="line">        &#x27;Access-Control-Allow-Headers&#x27;: &#x27;Content-Type&#x27;,</span><br><span class="line">    &#125;);</span><br><span class="line">	</span><br><span class="line">    // 第二步：将请求转发给服务器</span><br><span class="line">    const proxyRequest = http.request(&#123;</span><br><span class="line">        host: &#x27;127.0.0.1&#x27;,</span><br><span class="line">        port: 4000,</span><br><span class="line">        url: &#x27;/&#x27;,</span><br><span class="line">        method: request.method,</span><br><span class="line">        headers: request.headers</span><br><span class="line">    &#125;, (serverResponse) =&gt; &#123;</span><br><span class="line">        </span><br><span class="line">        // 第三步：收到服务器的响应</span><br><span class="line">        var body = &#x27;&#x27;;</span><br><span class="line"></span><br><span class="line">        serverResponse.on(&#x27;data&#x27;, (chunk) =&gt; &#123;</span><br><span class="line">            body += chunk;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        serverResponse.on(&#x27;end&#x27;, () =&gt; &#123;</span><br><span class="line">            console.log(&#x27;The data is &#x27; + body );</span><br><span class="line">            </span><br><span class="line">            // 第四步：将响应结果转发给浏览器</span><br><span class="line">            response.end(body);</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;).end();</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(3000, () =&gt; &#123;</span><br><span class="line">    console.log(&#x27;The proxyServer is running at http://localhost:3000&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3-serveless部署"><a href="#3-serveless部署" class="headerlink" title="3.serveless部署"></a>3.serveless部署</h3><p>网址： <a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/sls">https://console.cloud.tencent.com/sls</a></p>
+<p>以下是步骤：</p>
+<ol>
+<li><p>fork 此项目</p>
+</li>
+<li><p>在腾讯云serverless应用管理页面( <a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/sls">https://console.cloud.tencent.com/sls</a> ),点击<code>新建应用</code></p>
+</li>
+<li><p>顶部<code>创建方式</code>选择 <code>Web 应用</code></p>
+</li>
+<li><p>选择 <code>Express框架</code>,点击底部<code>下一步按钮</code></p>
+</li>
+<li><p>输入<code>应用名</code>,上传方式选择<code>代码仓库</code>,进行GitHub授权(如已授权可跳过这一步),代码仓库选择刚刚fork的项目</p>
+</li>
+<li><p>启动文件填入:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">export PORT=9000</span><br><span class="line">/var/lang/node16/bin/node app.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>点击<code>完成</code>,等待部署完成,点击<code>资源列表</code>的 <code>API网关</code> 里的 <code>URL</code>,正常情况会打开文档地址,点击文档<code>例子</code>可查看接口调用效果</p>
+</li>
+</ol>
+<p>在serveless部署之后，跨域问题解决了。</p>
+</article>
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">Sherlock</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1">Stellar 1.29.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+</aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

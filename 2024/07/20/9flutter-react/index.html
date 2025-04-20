@@ -1,0 +1,759 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin><link rel="preconnect" href="https://unpkg.com" crossorigin><link rel="preconnect" href="https://cdn.bootcdn.net" crossorigin><link rel="preconnect" href="null" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>从Flutter到React,架空用户的性能宰相 - sherlock</title>
+
+  
+    <meta name="description" content="本文将会以Flutter和React的渲染原理为主线，讲述不同框架之间的差异与共性,并且以此为基础，探讨性能优化的一些原则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从Flutter到React,架空用户的性能宰相">
+<meta property="og:url" content="http://example.com/2024/07/20/9flutter-react/index.html">
+<meta property="og:site_name" content="sherlock">
+<meta property="og:description" content="本文将会以Flutter和React的渲染原理为主线，讲述不同框架之间的差异与共性,并且以此为基础，探讨性能优化的一些原则">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/07/20/9flutter-react/render1.png">
+<meta property="og:image" content="http://example.com/2024/07/20/9flutter-react/update.jpg">
+<meta property="og:image" content="http://example.com/2024/07/20/9flutter-react/example.png">
+<meta property="og:image" content="http://example.com/2024/07/20/9flutter-react/rich-nor.png">
+<meta property="og:image" content="http://example.com/2024/07/20/9flutter-react/rich-nor2.png">
+<meta property="og:image" content="http://example.com/2024/07/20/9flutter-react/text-from-rich.png">
+<meta property="og:image" content="http://example.com/2024/07/20/9flutter-react/whydeepfirst.png">
+<meta property="og:image" content="http://example.com/2024/07/20/9flutter-react/fibertree.png">
+<meta property="og:image" content="http://example.com/2024/07/20/9flutter-react/curr-wlp.png">
+<meta property="og:image" content="http://example.com/2024/07/20/9flutter-react/reactvsflutter1.png">
+<meta property="article:published_time" content="2024-07-20T02:56:16.000Z">
+<meta property="article:modified_time" content="2025-03-31T13:05:45.012Z">
+<meta property="article:author" content="Sherlock">
+<meta property="article:tag" content="develop">
+<meta property="article:tag" content="妙手">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/20/9flutter-react/render1.png">
+  
+  
+  
+  <meta name="keywords" content="develop,妙手">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+
+  
+
+  <link rel="stylesheet" href="/css/custom-font.css">
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/116318567?s=400&u=f69ce1c770e6d9d35daf7c97c343d6a81a64c122&v=4" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">sherlock</div><div class="sub normal cap">探索代码与创意的交汇点</div><div class="sub hover cap" style="opacity:0"> 用技术构建未来的想象</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/notes/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/explore/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2025/03/31/18mylife/"><span class="title">我最近的生活</span></a><a class="item title" href="/2025/04/20/19React19/"><span class="title">React19概览</span></a><a class="item title" href="/2024/07/14/8Auth/"><span class="title">权限认证</span></a><a class="item title" href="/2024/07/20/9flutter-react/"><span class="title">从Flutter到React,架空用户的性能宰相</span></a><a class="item title" href="/2024/06/15/7long/"><span class="title">龙芯开发板</span></a><a class="item title" href="/2024/01/13/2some/"><span class="title">鸟宿池边树</span></a><a class="item title" href="/2024/03/23/4Zing/"><span class="title">Zing 一款前后端独立gpt软件</span></a><a class="item title" href="/2024/02/01/3wyyapp/"><span class="title">低配版仿网易云app</span></a><a class="item title" href="/2025/03/31/5js_debounce/"><span class="title">简单的防抖及其迭代</span></a><a class="item title" href="/2024/06/15/6ospp/"><span class="title">记录一次开源经历--Ospp</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%A6%99%E6%89%8B/">妙手</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-07-20T02:56:16.000Z">2024-07-20</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-03-31T13:05:45.012Z">2025-03-31</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>从Flutter到React,架空用户的性能宰相</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><p><strong><em>“彼时彼刻，恰如此时此刻”<br>“竟能如此相像？”     ————题记</em></strong></p>
+<h1 id="渲染基本原理"><a href="#渲染基本原理" class="headerlink" title="渲染基本原理"></a>渲染基本原理</h1><p>本部分权当科普,亦欲抛砖引玉</p>
+<p>计算机图像中的渲染需要三个部分配合CPU、GPU、显示器<br>其中，CPU负责图像数据计算、GPU负责图像数据渲染、显示器负责图像数据显示<br>CPU把计算好的、需要显示的内容交给GPU，由GPU完成渲染后放入帧缓冲区，随后视频控制器根据垂直同步信号（VSync）以每秒60次的速度，从帧缓冲区读取帧数据交由显示器完成图像显示。</p>
+<p>CPU:任务调度、数据计算<br>GPU：图像渲染、着色器、抗锯齿、光栅化等<br>载体：包括浏览器、App等</p>
+<h1 id="How-Flutter-Work"><a href="#How-Flutter-Work" class="headerlink" title="How Flutter Work ?"></a>How Flutter Work ?</h1><p>这个问题可以从两个方面回答，第一个是 用什么 , 第二个是 怎么用<br>从 用什么 的角度，Flutter团队使用了两个工具，一个是dart，一个是skia<br>从 怎么用 的角度，Flutter团队使用了三棵树，分别是Widget Tree、Element Tree、RenderObject Tree</p>
+<h2 id="Dart-and-Skia"><a href="#Dart-and-Skia" class="headerlink" title="Dart and Skia"></a>Dart and Skia</h2><p>此处我们简单掠过，并不是本文的重点</p>
+<p>1.Skia是一款用C++开发的2D图像绘制引擎，保证了同一套代码调用在多个平台上的渲染效果是完全一致的。</p>
+<p>2.Dart是一个前端开发的强类型语言。</p>
+<h2 id="Flutter-Render"><a href="#Flutter-Render" class="headerlink" title="Flutter Render"></a>Flutter Render</h2><h3 id="Flutter-的三棵树"><a href="#Flutter-的三棵树" class="headerlink" title="Flutter 的三棵树"></a>Flutter 的三棵树</h3><p>1.Widget Tree<br>2.Element Tree<br>3.RenderObject Tree</p>
+<p>那么Widget、Element、RenderObject指的是什么呢？</p>
+<p>Widget: 是Flutter的基本构建块，是一个不可变的配置信息<br>比如一个Container组件，有什么子元素？背景颜色是什么？宽高啊等等</p>
+<ul>
+<li>在flutter中，Everything is a Widget</li>
+<li>A widget is immutable description of part a user interface 一个Widget是一个不可变的用户界面的描述</li>
+</ul>
+<p>当然，如果你学过html，可以先把Widget理解为html中的标签，比如div、span等等，即dom<br>但是显然会有以下问题：既然widget不可变，那么Flutter是如何更改UI(用户界面)的呢？<br>这就引出了Element和RenderObject的概念</p>
+<p>Element 是Widget的实例，是可变的，当我们当我们用一个新的Widget替换旧的Widget时，Element会更新其属性甚至新建新的Element以匹配新的Widget。</p>
+<p>RenderObject是Element的一个实例，它也是可变的。RenderObject包含了实际的绘制操作，它描述了在屏幕上显示的内容。<br>简单的来说，RenderObject就是Flutter “需要绘制出的东西”</p>
+<h3 id="Flutter-Render-Steps"><a href="#Flutter-Render-Steps" class="headerlink" title="Flutter Render Steps"></a>Flutter Render Steps</h3><p>以如下代码为例</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">runApp(</span><br><span class="line">    Text(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/20/9flutter-react/render1.png" alt="示例图"></p>
+<p>在这个例子里，flutter新建了一个Text：</p>
+<ol>
+<li>运行runApp，并把Text放到Widget树中,</li>
+<li>创建一个LeafRenderObjectElement(ps1:这里是Element，不是RenderObject! ; ps2:<br>Leaf表示这是一个叶子节点，即没有子节点的节点)</li>
+<li>根据LeafRenderObjectElement的creatRenderObject创建一个RenderObject,即RenderParagraph</li>
+</ol>
+<p>不过需要注意的是： <strong>Flutter不会为每个Widget都创建一个RenderObject，而是经过层层调用之后的叶子元素才会创建RenderObject</strong></p>
+<p>比如，<br>Text这个Widget内部是由RichWidget实现的，Flutter的Widget树会有Text-RichText树结构，但是并不会为Text创建一个RenderObject，而是RichText创建一个RenderObject<br>(此处为了方便理解，使用最常见的Text，并且暂且无视RichText)</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/20/9flutter-react/update.jpg" alt="示例图"></p>
+<p>当Flutter更新的时候，以图中为例，我们把Text展示的文字从Hello 改为Hi<br>Flutter将会做以下几件事：</p>
+<ol>
+<li>创建一个新的Text Widget，并使用canUpdate方法把他和之前的Widget比较</li>
+<li>canUpdate传入oldWidget 和 newWidget，返回true或false，可以和react 的shouldComponentUpdate比较</li>
+<li>如果不同，则替换原有的Widget</li>
+<li>此时,LeafRenderObjectElement,则需要改变，会调用updateRenderObject方法</li>
+<li>与创建不同的是，这里的LeafRenderObjectElement会获取已有的RenderObject并改变其状态，而非新建、替换</li>
+</ol>
+<p>如果你使用flutter开发工具来查看RenderObject id，会发现并没有改变</p>
+<p>由于不太好对比，略去相同的情况的图</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="example.png" width="500" alt="example.png">
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="rich-nor.png" width="500" alt="切换时的RenderObject1">
+
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="rich-nor2.png" width="500" alt="切换时的RenderObject2">
+
+<p>可以看到，当使用RichText和Text的时候，两者切换时，RenderObjectId会改变<br>至于为什么使用Text时，也存在RichText的树级结构，是因为Text内部是由RichText加工得到的</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/20/9flutter-react/text-from-rich.png" alt="Text内部返回值"></p>
+<p><strong>由此可以验证上文,Flutter不会为每个Widget都创建一个RenderObject，而是经过层层调用之后的叶子元素才会创建RenderObject</strong></p>
+<hr>
+<p>在开始React部分之前，我们先来看一道老生常谈的八股题<br>事实上，虽然称之为“八股”，但我认为这道题很真的很有意义</p>
+<h1 id="讲一下浏览器的渲染流程"><a href="#讲一下浏览器的渲染流程" class="headerlink" title="讲一下浏览器的渲染流程 ?"></a>讲一下浏览器的渲染流程 ?</h1><p>从网络拿到html文件之后，开启渲染主线程进行解析，目的是解析为DOM树<br>同时开启一个预加载线程，这个线程主要负责css资源, 预加载线程快速浏览Link部分，通过网络线程请求css资源，之后在预加载线程进行解析并且返回给渲染在主线程。（解析、计算样式）<br>在遇到html中的js文件时，会停止html解析，即阻塞主线程</p>
+<p>渲染主线程获得DOM树以及CSSOM树之后，会进行计算样式，把预设样式转化为对应的值以及相对样式转化为绝对样式。（布局）</p>
+<p>主线程遍历合成之后的树，生成布局树。之后对布局树进行分层，这一部分是为了更改时更快。（分层）</p>
+<p>主线程为每个层生成单独的指令集。（生成指令集）</p>
+<p>至此主线程任务结束。</p>
+<p>之后进行分块，会把上一步的指令集会交给合成线程，合成线程的工作会交给多个线程进行。（分块）</p>
+<p>合成线程把信息、任务交给<strong>GPU进程</strong>，GPU开启多个线程，进行进行光栅化，并且优先处理靠近视口区域的块，即进行计算每个像素点的颜色。<br>（光栅化）</p>
+<p>之后，GPU把每个层、块的光栅化结果交给合成线程，合成线程计算出每个块的位置，以及旋转、缩放等。（合成）</p>
+<hr>
+<p>Ok,我们现在进入React部分</p>
+<h1 id="How-React-Renders"><a href="#How-React-Renders" class="headerlink" title="How React Renders ?"></a>How React Renders ?</h1><h2 id="What-is-React"><a href="#What-is-React" class="headerlink" title="What is React ?"></a>What is React ?</h2><p>什么是React？</p>
+<p>这里需要简单祛魅一下，React是一个library是一个库，不是一个framework.<br>如果需要类比的话，类似于lodash、tinyColor等等</p>
+<p>但是为什么React如此如日中天，被推崇备至？<br>因为React的这两个核心特性：声明式API、虚拟Dom</p>
+<p>不过，如果深入理解一下的话，你会发现声明式API和虚拟Dom是双生一体，无法分割的两个特性</p>
+<h3 id="声明式API"><a href="#声明式API" class="headerlink" title="声明式API"></a>声明式API</h3><p>所谓的声明式API，就是告诉React你想要的是什么，而并非是如何做。</p>
+<p>举个例子，我们现在有一个列表,列表包括两个div，一个是红色，一个是蓝色</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;1&quot;</span> <span class="attr">style</span>=<span class="string">&quot;color:red&quot;</span>&gt;</span>Red<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;2&quot;</span> <span class="attr">style</span>=<span class="string">&quot;color:blue&quot;</span>&gt;</span>Blue<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>现在有一个需求，需要你把Blue的div变成红色，这时候在html、js中的操作是什么呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;2&#x27;</span>).<span class="property">style</span>.<span class="property">color</span> = <span class="string">&#x27;red&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样的操作是命令式的，即告诉你的工具如何做<br>那么声明式的操作是什么?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> const [color, setColor] = useState(&#x27;blue&#x27;)</span><br><span class="line"></span><br><span class="line">&lt;div id=&quot;1&quot; style=&#123;&#123;color: &#x27;red&#x27;&#125;&#125;&gt;Red&lt;/div&gt;</span><br><span class="line">&lt;div id=&quot;2&quot; style=&#123;&#123;color: color&#125;&#125;&gt;Blue&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当我们想要操作的时候，只需要改变color的值即可，React会自动帮你完成剩下的操作</p>
+<p>当然，这个例子并没有完全显示出声明式API的优越性，但是当你的项目越来越大，你会发现声明式API的优势</p>
+<h3 id="虚拟Dom"><a href="#虚拟Dom" class="headerlink" title="虚拟Dom"></a>虚拟Dom</h3><p>所谓虚拟DOM，是一种概念<br>大致就是在内存中创建一个虚拟的DOM树，当数据发生变化时，React会比较新旧两颗虚拟DOM树的差异，然后只更新差异部分。</p>
+<p>分为 diff 和 调和 两个部分<br>diff：找出current 虚拟dom 和 next 虚拟dom 的差异<br>调和：让真实dom树和current虚拟dom树保持一致</p>
+<h4 id="Diff-Algorithm"><a href="#Diff-Algorithm" class="headerlink" title="Diff Algorithm"></a>Diff Algorithm</h4><p>React 的 Diff 算法主要基于两个假设：<br>两个不同类型的元素会产生不同的树。<br>开发者可以通过 key 属性来指示哪些子元素在不同的渲染下能保持稳定。<br>基于这两个假设，React 的 Diff 算法可以被分为两个主要部分：元素类型的比较和同一类型元素的比较。<br>元素类型的比较  </p>
+<ol>
+<li>当 React 对比两个元素时，首先会检查元素的类型。如果元素的类型不同，React 会直接销毁旧的树并建立新的树。例如，当一个元素从 a 变为 img，React 会销毁 a 及其子元素，然后新建 img 及其子元素。  </li>
+<li>同一类型元素的比较  当两个元素为同一类型时，React 会保留 DOM 节点，并仅比较和更新改变的属性。然后，React 会递归地对子元素进行相同的过程。</li>
+</ol>
+<p>对于列表元素，React 无法知道列表中的元素是否有变化，因此需要开发者提供一个 key 属性来帮助 React 识别哪些元素是新的，哪些元素是旧的。这样，React 就可以只更新改变的元素，而不是重新渲染整个列表。<br>总的来说，React 的 Diff 算法通过智能地比较新旧虚拟 DOM 树的差异，使得只有实际改变的部分才会被更新，从而提高了性能。</p>
+<ul>
+<li>使用了深度优先的遍历算法</li>
+<li>优化策略<ul>
+<li>忽略了跨层级的节点的比较</li>
+<li>通过 key 来判断是否是同一个节点</li>
+</ul>
+</li>
+</ul>
+<h5 id="为什么使用深度优先？"><a href="#为什么使用深度优先？" class="headerlink" title="为什么使用深度优先？"></a>为什么使用深度优先？</h5><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/20/9flutter-react/whydeepfirst.png" alt="深度优先"></p>
+<p>假设有以上dom树，两层，每个非叶子节点都有n个子节点</p>
+<p>对于n1点，<br>广度优先：遍历n+1个节点<br>深度优先：遍历2个节点</p>
+<p>对于n2点，<br>广度优先：遍历2n个节点<br>深度优先：遍历1+n个节点</p>
+<p>对于n3点，<br>广度优先：遍历n+n×n个节点<br>深度优先：遍历n+n×n个节点</p>
+<p>可见对于叶子节点的改变的比较，深度优先效率要远远大于广度优先</p>
+<p>不仅如此，由于：<br><strong>一段时间内大部分的改变都会很集中</strong><br>所以，深度优先更加适合React的Diff算法</p>
+<h3 id="Fiber-架构"><a href="#Fiber-架构" class="headerlink" title="Fiber 架构"></a>Fiber 架构</h3><p>Fiber是虚拟Dom的一种实现方式</p>
+<p>在React 16之前，React使用的是Stack Reconciler，即栈调和器，这种调和器是递归的，当递归深度过深时，会导致浏览器卡死<br>Fiber架构是React 16中引入的一种新的协调引擎，它的目的是为了更好地处理虚拟DOM的更新，使其更具有灵活性和效率。</p>
+<p>存在内存里的虚拟Dom，需要一种保存格式，Fiber的格式是javascript对象</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> &#x27;h1&#x27;<span class="punctuation">,</span>  <span class="comment">// 组件类型</span></span><br><span class="line">  <span class="attr">&quot;key&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span>   <span class="comment">// key</span></span><br><span class="line">  <span class="attr">&quot;props&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> ... <span class="punctuation">&#125;</span><span class="punctuation">,</span> <span class="comment">// 输入的props</span></span><br><span class="line">  <span class="attr">&quot;state&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> ... <span class="punctuation">&#125;</span><span class="punctuation">,</span> <span class="comment">// 组件的state (如果是class组件或带有state的function组件)</span></span><br><span class="line">  <span class="attr">&quot;child&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Fiber&quot;</span> | <span class="string">&quot;null&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">// 第一个子元素的Fiber</span></span><br><span class="line">  <span class="attr">&quot;sibling&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Fiber&quot;</span> | <span class="string">&quot;null&quot;</span><span class="punctuation">,</span>  <span class="comment">// 下一个兄弟元素的Fiber</span></span><br><span class="line">  <span class="attr">&quot;return&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Fiber&quot;</span> | <span class="string">&quot;null&quot;</span><span class="punctuation">,</span>  <span class="comment">// 父元素的Fiber</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Fiber：一个带有列表关系的DOM树</p>
+<h4 id="Fiber工作特性"><a href="#Fiber工作特性" class="headerlink" title="Fiber工作特性"></a>Fiber工作特性</h4><ul>
+<li>单元工作：每个Fiber节点代表一个单元，所有Fiber节点共同组成一个Fiber链表</li>
+<li>连接属性：slibing 兄弟、child 子节点、return 父节点</li>
+<li>React在更新时，会根据现有的Fiber树（Current Tree）创建一个新的临时树（Work-in-progress (WIP) Tree）,WIP-Tree包含了当前更新受影响的最高节点直至其所有子孙节点。<br>因为React在更新时总是维护了两个Fiber树，所以可以随时进行比较、中断或恢复等操作，而且这种机制让React能够同时具备拥有优秀的渲染性能和UI的稳定性。</li>
+</ul>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/20/9flutter-react/fibertree.png" alt="FiberTree"></p>
+<p>current 与 workinprogress：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/20/9flutter-react/curr-wlp.png" alt="Current-WorkInProgress"></p>
+<p>react不会改变current tree，而是在workInProgress tree上进行操作，当workInProgress tree完成后，react会将其替换为current tree<br>这里的替换是指针上的替换，即current tree的指针指向workInProgress tree，<br>这样只需要创建两个Fiber树，就可以重复利用，节省了内存</p>
+<h5 id="Fiber如何实现优先级"><a href="#Fiber如何实现优先级" class="headerlink" title="Fiber如何实现优先级?"></a>Fiber如何实现优先级?</h5><p>React Fiber的调度器是一个优先级调度器，它可以中断任务，然后根据优先级重新安排任务的执行顺序。这样可以保证高优先级任务的优先执行，从而提高用户体验。</p>
+<ul>
+<li>requestIdleCallback <ul>
+<li>安排低优先级任务</li>
+</ul>
+</li>
+<li>requestAnimationFrame<ul>
+<li>安排高优先级任务</li>
+</ul>
+</li>
+</ul>
+<h4 id="Fiber工作流程"><a href="#Fiber工作流程" class="headerlink" title="Fiber工作流程"></a>Fiber工作流程</h4><p>Fiber工作整体分为两个部分</p>
+<ul>
+<li>Render</li>
+<li>Commit</li>
+</ul>
+<p>其中，Render部分是异步的，在渲染的过程中可以执行一些网络请求<br>Commit部分是同步的，用于执行副作用</p>
+<p><strong>副作用：对于Dom的操作以及特定的生命周期的方法</strong></p>
+<p>Render阶段:</p>
+<ol>
+<li>创建与标记更新节点</li>
+<li>收集副作用列表</li>
+</ol>
+<p>在对节点进行遍历时，Fiber采用的是While 循环 而非 递归 的方式</p>
+<p>Commit阶段</p>
+<ol>
+<li>遍历 Effects 列表并为每个Effect 找到对应的组件实例</li>
+<li>正式提交执行副作用</li>
+</ol>
+<p>因为Effect 会导致用户可见的界面的改变，所以必须是同步的</p>
+<h1 id="回归主题：性能"><a href="#回归主题：性能" class="headerlink" title="回归主题：性能"></a>回归主题：性能</h1><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/20/9flutter-react/reactvsflutter1.png" alt="性能"></p>
+<p>我们需要明确一个原则：对于视图的改变代价都是高昂的:</p>
+<p>在上文 <strong>浏览器渲染流程</strong> 中我们可以看到，从拿到数据到渲染到屏幕上，需要经过多个步骤，而每个步骤都会消耗时间</p>
+<p><strong>Reflow（重排）</strong>：当 DOM 的变化影响到元素的几何属性（例如宽度、高度、位置等）时，浏览器需要重新计算元素的几何属性，然后重新渲染页面。这个过程被称为 Reflow。Reflow 主要发生在“计算样式，把预设样式转化为对应的值以及相对样式转化为绝对样式”这个步骤之后，即在“布局”阶段。</p>
+<p><strong>Repaint（重绘）</strong>：当 DOM 的变化只影响到元素的外观，但并不影响布局时，浏览器只需要重新绘制这些元素。这个过程被称为 Repaint。Repaint 主要发生在“主线程为每个层生成单独的指令集”这个步骤之后，即在“生成指令集”阶段。</p>
+<p>DOM的改变的代价要远远大于其样式的改变的代价</p>
+<p>所以flutter 和react 都“架空”了用户，给让用户操作“自己的dom”<br>在Flutter中，用户通过widget来实现自己想做的事，在React中，指的是React Component</p>
+<p>用户操作之后，Flutter和React，都会生成对应的“虚拟DOM”<br>在Flutter 中，可以简单的理解为Element，而在React中，指的是虚拟DOM（Fiber）<br>并且，在这个过程中进行优化<br>如果Widget可以复用，那么则复用，避免了所有更改。如果不可以，则查看是否可以更新，如果可以更新，则更新，避免了新建的高昂代价。如果不可以，则新建。<br>虚拟DOM（Fiber）也是一样</p>
+<p>之前一直在看性能优化的博客，现在才发现是舍本逐末<br>事实上，当我们了解了这些原理之后，性能便手到擒来了</p>
+<p>以这篇文章的一些点举两个简单的例子：</p>
+<ol>
+<li>因为深度优先的遍历策略，我们尽可能减少dom的嵌套，实现扁平化DOM树</li>
+<li>因为React的Diff算法，我们可以使用key来帮助React识别哪些元素是新的，哪些元素是旧的，从而提高性能</li>
+</ol>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/07/25/10http/">HTTP 驾驭网络的艺术</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/07/14/8Auth/">权限认证</a></div></section></div>
+
+<div class="related-wrap" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2024/03/23/4Zing/" title="Zing 一款前后端独立gpt软件"><span class="title">Zing 一款前后端独立gpt软件</span><span class="excerpt">本文介绍作者作为独立开发者，完成的一款前后端独立开发的gpt软件，包括了一些技术细节以及界面展示。总体实现了流式输出、文字回答、图片回答等核心功能</span></a><a class="item" href="/2024/08/01/11oauth2-sso/" title="OAuth2.0与SSO：打造一个属于懒蛋的世界"><span class="title">OAuth2.0与SSO：打造一个属于懒蛋的世界</span><span class="excerpt">试想一下，你是一个懒蛋，你不想记住各种各样的账号密码，你不想在各种网站上注册账号，你只想使用一个账号密码，然后就可以访问所有的网站，这个时候，OAuth2.0和SSO就是你的救星。</span></a><a class="item" href="/2025/03/31/5js_debounce/" title="简单的防抖及其迭代"><span class="title">简单的防抖及其迭代</span><span class="excerpt">本文主要讲述了防抖的基本原理，以及在实际开发中的应用，以及一些迭代</span></a><a class="item" href="/2024/09/14/14deploy/" title="前后端（React + Node）项目部署全流程及常见问题解析"><span class="title">前后端（React + Node）项目部署全流程及常见问题解析</span><span class="excerpt">本文详细记录了前后端项目（React + Node）部署过程中遇到的各种问题和解决方案，包括NVM、Node、npm、Linux大小写敏感、用户权限、SSH进程等关键点，旨在为开发者提供参考。</span></a><a class="item" href="/2024/09/12/15cross-end/" title="一码多用——跨端发展史"><span class="title">一码多用——跨端发展史</span><span class="excerpt">这篇文章以跨端技术的演进过程为中心，重点分析了Cordova、React Native和Flutter的渲染原理，尤其深入介绍了Flutter的独特三层架构。文章详细阐述了Flutter自有的Skia图形引擎和Dart语言的作用，以及...</span></a></div></section></div>
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">Sherlock</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1">Stellar 1.29.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">渲染基本原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#How-Flutter-Work"><span class="toc-text">How Flutter Work ?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dart-and-Skia"><span class="toc-text">Dart and Skia</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flutter-Render"><span class="toc-text">Flutter Render</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter-%E7%9A%84%E4%B8%89%E6%A3%B5%E6%A0%91"><span class="toc-text">Flutter 的三棵树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter-Render-Steps"><span class="toc-text">Flutter Render Steps</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%B2%E4%B8%80%E4%B8%8B%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B"><span class="toc-text">讲一下浏览器的渲染流程 ?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#How-React-Renders"><span class="toc-text">How React Renders ?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-React"><span class="toc-text">What is React ?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8FAPI"><span class="toc-text">声明式API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9FDom"><span class="toc-text">虚拟Dom</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Diff-Algorithm"><span class="toc-text">Diff Algorithm</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%EF%BC%9F"><span class="toc-text">为什么使用深度优先？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fiber-%E6%9E%B6%E6%9E%84"><span class="toc-text">Fiber 架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Fiber%E5%B7%A5%E4%BD%9C%E7%89%B9%E6%80%A7"><span class="toc-text">Fiber工作特性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Fiber%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">Fiber如何实现优先级?</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Fiber%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-text">Fiber工作流程</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E4%B8%BB%E9%A2%98%EF%BC%9A%E6%80%A7%E8%83%BD"><span class="toc-text">回归主题：性能</span></a></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

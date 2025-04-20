@@ -1,0 +1,741 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin><link rel="preconnect" href="https://unpkg.com" crossorigin><link rel="preconnect" href="https://cdn.bootcdn.net" crossorigin><link rel="preconnect" href="null" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>一码多用——跨端发展史 - sherlock</title>
+
+  
+    <meta name="description" content="这篇文章以跨端技术的演进过程为中心，重点分析了Cordova、React Native和Flutter的渲染原理，尤其深入介绍了Flutter的独特三层架构。文章详细阐述了Flutter自有的Skia图形引擎和Dart语言的作用，以及其如何通过渲染流水线和双缓冲机制优化UI性能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一码多用——跨端发展史">
+<meta property="og:url" content="http://example.com/2024/09/12/15cross-end/index.html">
+<meta property="og:site_name" content="sherlock">
+<meta property="og:description" content="这篇文章以跨端技术的演进过程为中心，重点分析了Cordova、React Native和Flutter的渲染原理，尤其深入介绍了Flutter的独特三层架构。文章详细阐述了Flutter自有的Skia图形引擎和Dart语言的作用，以及其如何通过渲染流水线和双缓冲机制优化UI性能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-12T06:25:53.000Z">
+<meta property="article:modified_time" content="2025-03-31T13:05:45.000Z">
+<meta property="article:author" content="Sherlock">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+
+  
+
+  <link rel="stylesheet" href="/css/custom-font.css">
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://avatars.githubusercontent.com/u/116318567?s=400&u=f69ce1c770e6d9d35daf7c97c343d6a81a64c122&v=4" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">sherlock</div><div class="sub normal cap">探索代码与创意的交汇点</div><div class="sub hover cap" style="opacity:0"> 用技术构建未来的想象</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/notes/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/explore/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2025/03/31/18mylife/"><span class="title">我最近的生活</span></a><a class="item title" href="/2025/04/20/19React19/"><span class="title">React19概览</span></a><a class="item title" href="/2024/07/14/8Auth/"><span class="title">权限认证</span></a><a class="item title" href="/2024/07/20/9flutter-react/"><span class="title">从Flutter到React,架空用户的性能宰相</span></a><a class="item title" href="/2024/06/15/7long/"><span class="title">龙芯开发板</span></a><a class="item title" href="/2024/01/13/2some/"><span class="title">鸟宿池边树</span></a><a class="item title" href="/2024/03/23/4Zing/"><span class="title">Zing 一款前后端独立gpt软件</span></a><a class="item title" href="/2024/02/01/3wyyapp/"><span class="title">低配版仿网易云app</span></a><a class="item title" href="/2025/03/31/5js_debounce/"><span class="title">简单的防抖及其迭代</span></a><a class="item title" href="/2024/06/15/6ospp/"><span class="title">记录一次开源经历--Ospp</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%A6%99%E6%89%8B/">妙手</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-09-12T06:25:53.000Z">2024-09-12</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-03-31T13:05:45.000Z">2025-03-31</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>一码多用——跨端发展史</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><p>这篇文章以跨端技术的演进过程为中心，重点分析了Cordova、React Native和Flutter的渲染原理，尤其深入介绍了Flutter的独特三层架构。<br>文章详细阐述了Flutter自有的Skia图形引擎和Dart语言的作用，以及其如何通过渲染流水线和双缓冲机制优化UI性能。</p>
+<span id="more"></span>
+
+<h1 id="跨端技术的历史"><a href="#跨端技术的历史" class="headerlink" title="跨端技术的历史"></a>跨端技术的历史</h1><p>说实话，我是那种很反感教科书一类的教案上来就讲历史而不是实操的人</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://cordova.apache.org/">Cordova</a>  和 Ionic 诞生于2009年。<br>其中，Cordova是跨端框架，基于WebView和JSBridge，<br>Ionic诞生时是基于Cordova的UI组件库</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://reactnative.dev/">React Native</a> Facebook于2015年推出的一种跨端开发框架。<br>并不使用WebView和JSBridge<br>其使用的是一种 “Native” 方法，我们后面会讲到</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://flutter.dev/">Flutter</a><br>是笔者最早接触到的跨端框架，是Google于2017年推出的一种跨端开发框架。</p>
+</li>
+</ol>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="一句话讲解"><a href="#一句话讲解" class="headerlink" title="一句话讲解"></a>一句话讲解</h2><ol>
+<li>Cordova&#x2F;Ionic: 使用WebView嵌入Web应用，对于原生的功能如相机等需要用JSBridge调用</li>
+<li>React Native: 使用JavaScript和React编写逻辑，映射到iOS和Android的原生组件上</li>
+<li>Flutter: 自有的Skia图形引擎渲染UI, 自研_<strong>三层架构</strong>_降低多端成本</li>
+</ol>
+<h2 id="Cordova"><a href="#Cordova" class="headerlink" title="Cordova"></a><a target="_blank" rel="noopener" href="https://cordova.apache.org/">Cordova</a></h2><h3 id="WebView"><a href="#WebView" class="headerlink" title="WebView"></a>WebView</h3><p>WebView是一个基于WebKit引擎的浏览器组件,实现了在移动应用中嵌入网页内容<br>原理:</p>
+<ol>
+<li>WebView <strong><em>内部使用了操作系统提供的浏览器内核</em></strong> (Android的Chrome、IOS的Safari)来渲染网页，类似一个迷你的浏览器</li>
+<li>WebView是原生应用的一部分，事实上是一个UI组件类似于按钮、文本框</li>
+<li>WebView允许网页和原生应用通信，通过JSBridge实现，网页和原生应用可以互相调用对方的功能</li>
+</ol>
+<h3 id="JSBridge"><a href="#JSBridge" class="headerlink" title="JSBridge"></a><a target="_blank" rel="noopener" href="https://javascript.plainenglish.io/what-is-jsbridge-f72f3c0987f1">JSBridge</a></h3><p>什么是JSBridge ?</p>
+<p>JSBridge is a bridge between the JavaScript engine and the native platform code.</p>
+<p>JSBridge是JavaScript引擎和原生平台（Android、IOS）的一个桥梁<br>它把javascript代码转化成原生平台能够看懂的语言并调用，然后将调用的结果返回给webView的界面</p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><h4 id="1-翻译为原生可理解的语言"><a href="#1-翻译为原生可理解的语言" class="headerlink" title="1. 翻译为原生可理解的语言"></a>1. <strong>翻译为原生可理解的语言</strong></h4><ul>
+<li><p><strong>Web 端调用 JSBridge</strong>：Web 页面使用 JavaScript 代码，通过一个暴露的 <code>window.bridge</code> 对象（或其他命名）来调用原生功能.</p>
+</li>
+<li><p><strong>JSBridge 传递</strong>：JSBridge 在 WebView 中监听这些调用（通过注册的方法），并将这些 JavaScript 调用转换为特定的指令，如 “takePhoto”。</p>
+</li>
+<li><p><strong>原生调用</strong>：原生应用事先会在 JSBridge 中提供一系列功能，如拍照、获取地理位置等。JSBridge 将 “takePhoto” 这样的指令映射到原生应用对应的功能调用，</p>
+</li>
+</ul>
+<h4 id="2-将指令发送给对应平台"><a href="#2-将指令发送给对应平台" class="headerlink" title="2. 将指令发送给对应平台"></a>2. <strong>将指令发送给对应平台</strong></h4><p>JSBridge 通过两种主要方式将 Web 页面的请求传递给原生应用：</p>
+<h5 id="1-URL"><a href="#1-URL" class="headerlink" title="1. URL"></a><strong>1. URL</strong></h5><ul>
+<li><p><strong>原理</strong>：在 WebView 中，JavaScript 可以通过修改 URL 的方式与原生应用通信。JSBridge 会构造一个特定的 URL 格式。<br>例如(以拍照为例) <code>bridge://takePhoto?params=...</code>，这个 URL 可以被原生识别。</p>
+</li>
+<li><p><strong>触发原生响应</strong>：WebView 拦截这个 URL，识别其内容并通知原生代码执行相应的功能（如调用相机）。</p>
+</li>
+</ul>
+<h5 id="2-注入-JavaScript-接口"><a href="#2-注入-JavaScript-接口" class="headerlink" title="2. 注入 JavaScript 接口"></a><strong>2. 注入 JavaScript 接口</strong></h5><ul>
+<li><p><strong>原理</strong>：原生应用可以主动注入一段 JavaScript 代码到 WebView 中，比如通过 <code>WebView.addJavascriptInterface</code>（在 Android<br>中），这段 JavaScript 暴露出一系列接口让 Web 页面调用。</p>
+</li>
+<li><p><strong>触发原生响应</strong>：Web 页面通过调用这些接口与原生交互，类似于直接调用本地 JavaScript<br>方法，但这些方法最终由原生实现。比如 <code>window.NativeInterface.takePhoto()</code> 这样的接口实际会触发原生代码。</p>
+</li>
+</ul>
+<h4 id="3-原生应用执行并返回结果"><a href="#3-原生应用执行并返回结果" class="headerlink" title="3. 原生应用执行并返回结果"></a>3. <strong>原生应用执行并返回结果</strong></h4><ul>
+<li><p><strong>原生处理</strong>：一旦原生应用接收到 Web 发来的指令（例如通过 URL 或 JavaScript 接口），它会执行相应的功能，比如启动相机等。</p>
+</li>
+<li><p><strong>返回数据到 Web</strong>：原生应用完成任务后，通常会将结果通过 JSBridge 返回给 Web 页面。<br>之后通过 调用时候设置的 JavaScript 回调函数进行对应的处理，</p>
+</li>
+</ul>
+<p>原生应用在完成任务后会调用这个回调函数，将数据传回 Web 页面。<br>之后由web页面进行相应</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>优点自不必说,我们来着重关注一下缺点</p>
+<ol>
+<li>在使用过程中，会频繁调用JSBridge，而JSBridge毕竟不是原生的API，所以会有一定的通信延迟和时间损耗</li>
+<li>使用WebView过程中，需要经历 “浏览器的渲染过程” ，而原生代码直接使用操作系统提供的图形控件，避免了多层抽象和额外的处理步骤</li>
+<li>原生控件可以更直接的利用GPU加速，而浏览器的GPU加速依赖于内部的实现和优化(增加了额外的抽象层,并且不同浏览器性能不一)</li>
+<li>JavaScript 代码需要经过解释、编译和优化等多个步骤，相比直接执行原生代码，效率较低</li>
+</ol>
+<h2 id="React-Native"><a href="#React-Native" class="headerlink" title="React Native"></a><a target="_blank" rel="noopener" href="https://reactnative.dev/">React Native</a></h2><p>React Native 和 Cordova&#x2F;Ionic 的区别在于，React Native 不使用 WebView，而是直接使用一种名为 “Native” 的方法。</p>
+<p>这种方法能够直接将Javascript界面以及点击、动画等交互变成对应平台的原生组件。<br>(ps: 这里的方法指的是method而非function)</p>
+<p>React Native 和 Weex 通过一种桥梁机制，使用 JavaScript 来定义应用的界面布局和交互逻辑。<br>但最终实际显示的界面不是基于 Web(WebView) 技术（如 HTML&#x2F;CSS），而是通过调用手机操作系统的<strong>原生 UI 件</strong>来呈现的。</p>
+<h3 id="什么是-Native-的控件？"><a href="#什么是-Native-的控件？" class="headerlink" title="什么是 Native 的控件？"></a>什么是 Native 的控件？</h3><p>“Native”意为”原生”，指的是对应的平台<br><strong>Native 控件</strong>（Native Components）指的是手机操作系统（如 iOS、Android）自带的用户界面组件。<br>这些控件是系统级别的，专门为该操作系统设计，通常表现更流畅、性能更好，用户体验更接近“原生应用”。</p>
+<p>一些常见的 Native 控件包括：</p>
+<ul>
+<li><p><strong>iOS 上的原生控件</strong>：</p>
+<ul>
+<li><code>UIView</code>: 用于显示内容的基础容器。</li>
+<li><code>UIButton</code>: 原生的按钮组件。</li>
+<li><code>UILabel</code>: 用于显示文本的组件。</li>
+</ul>
+</li>
+<li><p><strong>Android 上的原生控件</strong>：</p>
+<ul>
+<li><code>View</code>: Android 上的基础视图。</li>
+<li><code>Button</code>: 用于用户点击的按钮。</li>
+<li><code>TextView</code>: 用于显示文本的控件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="如何转化为-Native-控件？"><a href="#如何转化为-Native-控件？" class="headerlink" title="如何转化为 Native 控件？"></a>如何转化为 Native 控件？</h3><p>在 React Native 和 Weex 中，虽然开发者使用 JavaScript 来编写界面和交互逻辑，但这些框架背后会有一个<strong>桥接层（Bridge）</strong>。</p>
+<p>桥接层负责将 JavaScript 描述的界面结构（如 <code>&lt;View&gt;</code>、<code>&lt;Button&gt;</code> 等）转化为操作系统的原生控件。</p>
+<p>同时,桥接层也允许 JavaScript 和 原生 直接按互相调用对方。</p>
+<p>例如：</p>
+<ul>
+<li><p>在 React Native 中，开发者可能会用这样的 JavaScript 来创建一个按钮：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Button</span> title=<span class="string">&quot;Click Me&quot;</span> onPress=&#123;handleClick&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<p>虽然这段代码看上去像是 Web 的 JSX 代码，但实际上 React Native 背后的桥接机制会将这个按钮组件映射为 iOS 上的 <code>UIButton</code> 或 Android 上的 <code>Button</code>。</p>
+<p>也就是说，当你运行这个应用时，用户实际看到和交互的是原生平台的按钮，而不是一个 HTML 按钮。</p>
+</li>
+</ul>
+<h3 id="为什么要转化为-Native-控件？"><a href="#为什么要转化为-Native-控件？" class="headerlink" title="为什么要转化为 Native 控件？"></a>为什么要转化为 Native 控件？</h3><ol>
+<li><strong>性能</strong>：原生控件由操作系统直接渲染，性能比 WebView 中的 HTML&#x2F;CSS 渲染更好。操作系统可以更高效地处理这些组件的渲染、动画等任务。</li>
+<li><strong>用户体验</strong>：由于使用了系统级别的组件，控件的样式、交互效果和原生应用一致，使得用户体验更加流畅自然，尤其是在复杂的界面上。</li>
+<li><strong>系统功能</strong>：原生控件可以更容易地与操作系统的其他功能（如相机、通知、定位等）集成。</li>
+</ol>
+<h2 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a><a target="_blank" rel="noopener" href="https://flutter.dev/">Flutter</a></h2><p>本篇的目的就是以Flutter为核心，</p>
+<p>Flutter 是 Google 于 2017 年推出的一种跨端开发框架，它的原理和上文的两个跨端方法有所不同。</p>
+<p>Flutter 不借助原生的渲染能力（即上文提到的Native）,而是**<em>自己实现了一套渲染逻辑</em>**</p>
+<p><strong>Flutter 的三板斧:</strong></p>
+<ol>
+<li><strong>自有的 Skia 图形引擎</strong>：</li>
+<li><strong>Dart语言</strong>：</li>
+<li><strong>自研的三层架构</strong>：</li>
+</ol>
+<p>下面我们以图像的渲染原理来介绍前两板斧的作用(Skia和Dart)</p>
+<h3 id="图像的渲染原理-以Flutter为例"><a href="#图像的渲染原理-以Flutter为例" class="headerlink" title="图像的渲染原理(以Flutter为例)"></a>图像的渲染原理(以Flutter为例)</h3><p>在这之前，可以先看看我的这一篇文章</p>
+<div class="tag-plugin link dis-select"><a class="link-card rich" title="" href="https://holdme.fun/2024/07/10/9flutter-react/" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="title,icon,desc"><div class="top"><div class="lazy img" data-bg="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/link/8f277b4ee0ecd.svg"></div><span class="cap link footnote">https://holdme.fun/2024/07/10/9flutter-react/</span></div><div class="bottom"><span class="title">https://holdme.fun/2024/07/10/9flutter-react/</span><span class="cap desc footnote"></span></div></a></div>
+
+<p>在Flutter中，图像显示的基本原理依然需要CPU、GPU和显示器的协同配合，但其框架对渲染管线(通俗点说就是渲染的步骤)有一些独特的实现。让我们从Flutter渲染的角度进一步详细说明整个过程：</p>
+<h4 id="1-CPU的角色：Flutter渲染的初步计算"><a href="#1-CPU的角色：Flutter渲染的初步计算" class="headerlink" title="1. CPU的角色：Flutter渲染的初步计算"></a>1. <strong>CPU的角色：Flutter渲染的初步计算</strong></h4><ul>
+<li><strong>在Widget树的构建</strong>：CPU的任务是根据用户输入、应用状态变化以及开发者编写的代码，构建或重建Widget树。Widget树只是对UI界面的描述。</li>
+<li><strong>Element树和RenderObject树</strong>：<ul>
+<li><strong>Element树</strong>：Widget树在被构建&#x2F;更改后，CPU会生成与之对应的Element树。Element树的每个节点表示Widget的实例化。</li>
+<li><strong>RenderObject树</strong>：CPU还会创建和更新RenderObject树，这个树是负责实际布局和渲染的对象。RenderObject树保存了具体的布局和绘制信息（如尺寸、位置等），而CPU负责计算每个节点的布局。</li>
+</ul>
+</li>
+<li><strong>布局计算</strong>：Flutter的布局过程是自顶向下进行的。CPU会先确定父节点的尺寸和约束，然后再向子节点传递这些约束。通过这种递归过程，Flutter计算出每个Widget的大小和位置。</li>
+</ul>
+<h4 id="2-GPU的角色：Flutter渲染的实际执行"><a href="#2-GPU的角色：Flutter渲染的实际执行" class="headerlink" title="2. GPU的角色：Flutter渲染的实际执行"></a>2. <strong>GPU的角色：Flutter渲染的实际执行</strong></h4><ul>
+<li><strong>绘制指令生成</strong>：布局确定之后，CPU会将布局和绘制相关的数据打包成绘制指令。Flutter使用Skia图形库，Skia是一种跨平台的2D图形引擎。CPU生成的绘制指令通过Skia传递给GPU，由GPU完成实际的像素绘制。</li>
+<li><strong>绘制流水线</strong>：<ul>
+<li><strong>Layer树</strong>：(CPU生成)Flutter引入了Layer（图层）的概念，每一帧的渲染会产生一个Layer树。**<em>Layer树是RenderObject树的优化形式</em><strong>，包含了具体的</strong><em>绘制信息和层次结构</em>**。有助于高效地管理和合成多个绘制操作。</li>
+<li><strong>合成</strong>：当Layer树生成后，CPU会将其交给GPU进行合成。将不同的Layer按照正确的顺序组合并转换为可以显示的帧数据。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-帧缓冲区与VSync：协调显示器刷新"><a href="#3-帧缓冲区与VSync：协调显示器刷新" class="headerlink" title="3. 帧缓冲区与VSync：协调显示器刷新"></a>3. <strong>帧缓冲区与VSync：协调显示器刷新</strong></h4><ul>
+<li><strong>帧缓冲区的存储</strong>：当GPU完成了所有图层的合成并生成最终的像素数据后，数据会被存储在<strong>帧缓冲区</strong>中。帧缓冲区是GPU专门用于保存一帧完整图像的区域。(事实上就是一群内存块)</li>
+<li><strong>垂直同步（VSync）机制</strong>：Flutter使用VSync信号来协调GPU渲染和显示器刷新率。在大多数设备上，显示器的刷新率为60Hz，这意味着显示器每秒更新60次。Flutter会通过VSync信号来确保每次显示器刷新时，能够显示最新的一帧图像，避免撕裂现象。</li>
+<li><strong>帧速率控制</strong>：Flutter的渲染引擎通过监听VSync信号，确保在适当的时机开始渲染新的一帧。VSync信号通常每秒发送60次（即60Hz），当Flutter接收到VSync信号时，它会驱动新的渲染管线(驱动新的渲染步骤)，计算、生成和合成下一帧。</li>
+</ul>
+<h4 id="4-Flutter的双缓冲机制"><a href="#4-Flutter的双缓冲机制" class="headerlink" title="4. Flutter的双缓冲机制"></a>4. <strong>Flutter的双缓冲机制</strong></h4><ul>
+<li><strong>前后缓冲区</strong>：Flutter使用双缓冲机制来确保帧的平滑显示。后缓冲区是GPU正在渲染的一帧数据，而前缓冲区则是即将显示的完整帧。当后缓冲区渲染完成并在VSync信号到来时，缓冲区会交换，这样前缓冲区的数据被显示器读取并显示。</li>
+</ul>
+<h3 id="Flutter三层架构"><a href="#Flutter三层架构" class="headerlink" title="Flutter三层架构"></a>Flutter三层架构</h3><p>Flutter的架构采用分层设计，从下到上分为三层Embedder、Engine和Framework。</p>
+<p>最下层是Embedder层，实现了和操作系统对接，渲染、线程设置以及平台相关特性</p>
+<p>中间层是Engine层，包含Dart、Skia，Skia为上层提供了调用底层渲染和排版的能力，Dart则为Flutter提供了运行时调用Dart和渲染引擎的能力。而Engine层的作用，则是将它们组合起来，从它们生成的数据中实现视图渲染</p>
+<p>Framework层则是一个用Dart实现的UI库，包含了常规的图形、动画等功能。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>值得一提的是，Flutter在笔者目前的使用体验来看，他还只是一个类似于UI库的存在</p>
+<p>对于Android和IOS的原生服务，比如 通知提示、相机调用等，还是需要通过原生的方法来调用</p>
+<p>在Flutter里面，这个叫 “MethodChannel”</p>
+<h1 id="引申"><a href="#引申" class="headerlink" title="引申"></a>引申</h1><h2 id="动画中的双缓冲机制"><a href="#动画中的双缓冲机制" class="headerlink" title="动画中的双缓冲机制"></a>动画中的双缓冲机制</h2><p>例子：假如我们有一个动画，每秒钟60帧，每一帧都要变化</p>
+<p>假设这个动画为：第一帧为红色、第二帧为绿色</p>
+<ol>
+<li>第一帧的渲染:<br>CPU加工出需要显示的内容，放入后缓冲区<br>GPU处理后缓冲区的渲染，当VSync来到的时候，后缓冲区和前缓冲区交换<br>第一帧的数据现在在前缓冲区,显示器会读取它并显示,屏幕变成红色</li>
+<li>第二帧的渲染:<br>CPU加工出需要显示的内容，放入后缓冲区<br>GPU处理后缓冲区的渲染，当VSync来到的时候，后缓冲区和前缓冲区交换<br>第二帧的数据现在在前缓冲区,显示器会读取它并显示,屏幕变成绿色</li>
+</ol>
+<p>(ps:是不是特别像React里的虚拟Dom机制?)</p>
+<h2 id="明晰几个概念"><a href="#明晰几个概念" class="headerlink" title="明晰几个概念"></a>明晰几个概念</h2><ol>
+<li>渲染：把数据转化为图像的过程，在开发中大多指把“数据”转化为“可视化的图像”,<br>即：<strong>将抽象的界面结构（如Widget、形状、文本等）转化为可以显示在屏幕上的像素数据</strong></li>
+<li>显示：把渲染好的图像显示在屏幕上</li>
+</ol>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/09/14/14deploy/">前后端（React + Node）项目部署全流程及常见问题解析</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/08/14/12lexical-env/">javascript-词法环境</a></div></section></div>
+
+<div class="related-wrap" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2024/07/20/9flutter-react/" title="从Flutter到React,架空用户的性能宰相"><span class="title">从Flutter到React,架空用户的性能宰相</span><span class="excerpt">本文将会以Flutter和React的渲染原理为主线，讲述不同框架之间的差异与共性,并且以此为基础，探讨性能优化的一些原则</span></a></div></section></div>
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">Sherlock</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1">Stellar 1.29.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%A8%E7%AB%AF%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8E%86%E5%8F%B2"><span class="toc-text">跨端技术的历史</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E8%AE%B2%E8%A7%A3"><span class="toc-text">一句话讲解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cordova"><span class="toc-text">Cordova</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WebView"><span class="toc-text">WebView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSBridge"><span class="toc-text">JSBridge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text">过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%BF%BB%E8%AF%91%E4%B8%BA%E5%8E%9F%E7%94%9F%E5%8F%AF%E7%90%86%E8%A7%A3%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="toc-text">1. 翻译为原生可理解的语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%B0%86%E6%8C%87%E4%BB%A4%E5%8F%91%E9%80%81%E7%BB%99%E5%AF%B9%E5%BA%94%E5%B9%B3%E5%8F%B0"><span class="toc-text">2. 将指令发送给对应平台</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-URL"><span class="toc-text">1. URL</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%B3%A8%E5%85%A5-JavaScript-%E6%8E%A5%E5%8F%A3"><span class="toc-text">2. 注入 JavaScript 接口</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8%E6%89%A7%E8%A1%8C%E5%B9%B6%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="toc-text">3. 原生应用执行并返回结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Native"><span class="toc-text">React Native</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Native-%E7%9A%84%E6%8E%A7%E4%BB%B6%EF%BC%9F"><span class="toc-text">什么是 Native 的控件？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BD%AC%E5%8C%96%E4%B8%BA-Native-%E6%8E%A7%E4%BB%B6%EF%BC%9F"><span class="toc-text">如何转化为 Native 控件？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BD%AC%E5%8C%96%E4%B8%BA-Native-%E6%8E%A7%E4%BB%B6%EF%BC%9F"><span class="toc-text">为什么要转化为 Native 控件？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flutter"><span class="toc-text">Flutter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%9A%84%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86-%E4%BB%A5Flutter%E4%B8%BA%E4%BE%8B"><span class="toc-text">图像的渲染原理(以Flutter为例)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-CPU%E7%9A%84%E8%A7%92%E8%89%B2%EF%BC%9AFlutter%E6%B8%B2%E6%9F%93%E7%9A%84%E5%88%9D%E6%AD%A5%E8%AE%A1%E7%AE%97"><span class="toc-text">1. CPU的角色：Flutter渲染的初步计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-GPU%E7%9A%84%E8%A7%92%E8%89%B2%EF%BC%9AFlutter%E6%B8%B2%E6%9F%93%E7%9A%84%E5%AE%9E%E9%99%85%E6%89%A7%E8%A1%8C"><span class="toc-text">2. GPU的角色：Flutter渲染的实际执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%B8%A7%E7%BC%93%E5%86%B2%E5%8C%BA%E4%B8%8EVSync%EF%BC%9A%E5%8D%8F%E8%B0%83%E6%98%BE%E7%A4%BA%E5%99%A8%E5%88%B7%E6%96%B0"><span class="toc-text">3. 帧缓冲区与VSync：协调显示器刷新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Flutter%E7%9A%84%E5%8F%8C%E7%BC%93%E5%86%B2%E6%9C%BA%E5%88%B6"><span class="toc-text">4. Flutter的双缓冲机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flutter%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="toc-text">Flutter三层架构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%B3"><span class="toc-text">引申</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB%E4%B8%AD%E7%9A%84%E5%8F%8C%E7%BC%93%E5%86%B2%E6%9C%BA%E5%88%B6"><span class="toc-text">动画中的双缓冲机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%8E%E6%99%B0%E5%87%A0%E4%B8%AA%E6%A6%82%E5%BF%B5"><span class="toc-text">明晰几个概念</span></a></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
